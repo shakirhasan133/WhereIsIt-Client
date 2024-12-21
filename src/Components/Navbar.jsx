@@ -44,17 +44,22 @@ const Navbar = () => {
               </Link>
             ) : (
               <div className="relative">
-                <button
-                  className="hidden md:block"
-                  onClick={() => setDropdownOpen((prev) => !prev)}
-                  onBlur={() => setDropdownOpen(false)}
-                >
-                  <img
-                    src="https://via.placeholder.com/40" // Replace with user.photoURL
-                    alt="User Profile"
-                    className="w-10 h-10 rounded-full border-2 border-primary"
-                  />
-                </button>
+                <div className="flex items-center justify-center gap-2">
+                  <button
+                    className="hidden md:block"
+                    onClick={() => setDropdownOpen((prev) => !prev)}
+                    onBlur={() => setDropdownOpen(false)}
+                  >
+                    <img
+                      src="https://via.placeholder.com/40" // Replace with user.photoURL
+                      alt="User Profile"
+                      className="w-10 h-10 rounded-full border-2 border-primary"
+                    />
+                  </button>
+                  <button className=" p-2  text-primary-light font-medium rounded-md hover:bg-primary-dark  transition">
+                    Log out
+                  </button>
+                </div>
                 {isDropdownOpen && (
                   <div className="absolute w-[250px] right-0 mt-2 bg-primary-light text-primary-dark rounded-md shadow-lg z-10">
                     <Link
