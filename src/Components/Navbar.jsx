@@ -1,10 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { FaSearchLocation } from "react-icons/fa";
+import { IoMdCloseCircle } from "react-icons/io";
 import { IoHome } from "react-icons/io5";
+import { RiMenu3Fill } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../Provider/AuthContext";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
-  const user = false; // Replace with user state or context
+  const { user, signOutUser } = useContext(AuthContext);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -22,6 +26,31 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Handle Sign Out
+  const handleSignOut = () => {
+    signOutUser()
+      .then(() => {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "bottom-right",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          },
+        });
+        Toast.fire({
+          icon: "success",
+          title: "Logout Successful",
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <nav
@@ -63,7 +92,7 @@ const Navbar = () => {
           {/* Right Side Buttons */}
           <div className="flex items-center space-x-4">
             {!user ? (
-              <div className="flex items-center justify-center gap-2">
+              <div className="md:flex items-center justify-center gap-2 hidden ">
                 <Link
                   to="/login"
                   className="px-4 py-2 bg-primary-light text-primary-dark font-medium rounded-md hover:bg-primary-dark hover:text-primary-light transition"
@@ -87,12 +116,16 @@ const Navbar = () => {
                     onBlur={() => setDropdownOpen(false)}
                   >
                     <img
-                      src="https://via.placeholder.com/40" // Replace with user.photoURL
+                      src={user.photoURL} // Replace with user.photoURL
                       alt="User Profile"
                       className="w-10 h-10 rounded-full border-2 border-primary"
+                      referrerPolicy="no-referrer"
                     />
                   </button>
-                  <button className="p-2 text-primary-light font-medium rounded-md hover:bg-primary-dark transition">
+                  <button
+                    className="hidden md:block p-2 text-primary-light font-medium rounded-md hover:bg-primary-dark transition"
+                    onClick={handleSignOut}
+                  >
                     Log out
                   </button>
                 </div>
@@ -117,12 +150,12 @@ const Navbar = () => {
                       Manage My Items
                     </Link>
 
-                    <button
+                    {/* <button
                       onClick={() => alert("Logged Out")} // Replace with sign-out logic
                       className="block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition"
                     >
                       Sign Out
-                    </button>
+                    </button> */}
                   </div>
                 )}
               </div>
@@ -133,20 +166,11 @@ const Navbar = () => {
               onClick={() => setMobileMenuOpen((prev) => !prev)}
             >
               <span className="sr-only">Open Mobile Menu</span>
-              <svg
-                className="w-6 h-6 text-primary-light"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4 6h16M4 12h16m-7 6h7"
-                />
-              </svg>
+              {!isMobileMenuOpen ? (
+                <RiMenu3Fill className="text-xl"></RiMenu3Fill>
+              ) : (
+                <IoMdCloseCircle className="text-xl"></IoMdCloseCircle>
+              )}
             </button>
           </div>
         </div>
@@ -154,8 +178,8 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-primary-dark">
-          <ul className="flex flex-col space-y-2 px-4 py-2">
+        <div className="md:hidden bg-primary-darkest w-3/4 h-screen float-end absolute right-0">
+          <ul className="flex flex-col  px-4 py-2 justify-center ">
             <li>
               <Link
                 to="/"
@@ -172,6 +196,67 @@ const Navbar = () => {
                 Lost & Found Items
               </Link>
             </li>
+            {user ? (
+              <ul>
+                <li>
+                  <Link
+                    to="/add-item"
+                    className="block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition"
+                  >
+                    Add Lost and Found Item
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/recovered-items"
+                    className="block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition"
+                  >
+                    All Recovered Item
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/my-items"
+                    className="block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition"
+                  >
+                    Manage My Item
+                  </Link>
+                </li>
+              </ul>
+            ) : (
+              ""
+            )}
+
+            <span className="w-full h-[1px] bg-white mb-3"></span>
+            {!user ? (
+              <div className="flex flex-col items-left  gap-2  w-full text-center">
+                <Link
+                  to="/login"
+                  className="px-4 py-2 text-primary-darkest w-full bg-primary font-medium rounded-md  hover:text-primary-light transition"
+                >
+                  Log In
+                </Link>
+
+                <Link
+                  to="/signup"
+                  className="px-4 py-2 text-primary-light w-full bg-primary-dark font-medium rounded-md  transition"
+                >
+                  Sign Up
+                </Link>
+              </div>
+            ) : (
+              <div className="w-full text-center">
+                <h1 className=" py-2 w-full  hover:bg-primary-dark hover:text-primary-light transition">
+                  Shakir Hasan
+                </h1>
+                <button
+                  className="px-4 py-2 text-primary-darkest w-full bg-primary font-medium rounded-md  hover:text-primary-light transition"
+                  onClick={handleSignOut}
+                >
+                  Log Out
+                </button>
+              </div>
+            )}
           </ul>
         </div>
       )}

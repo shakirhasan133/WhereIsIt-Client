@@ -1,14 +1,67 @@
 import Lottie from "lottie-react";
 import { FaGoogle, FaEnvelope, FaEye, FaEyeSlash } from "react-icons/fa";
 import loginAnimation from "../assets/login.json";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../Provider/AuthContext";
+import Swal from "sweetalert2";
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  const {
+    signInWithGoogleEmail,
+    signUpWithEmail,
+    signInWithEmail,
+    Loading,
+    setLoading,
+    user,
+    setUser,
+    error,
+    setError,
+  } = useContext(AuthContext);
   const [showPass, setShowPass] = useState(false);
 
+  // Log in with Google
+
+  const handleLoginWithGoogleEmail = () => {
+    signInWithGoogleEmail()
+      .then((res) => {
+        setUser(res.user);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  // Log in with Email and password
+  const handleLoginWithEmailandPass = (e) => {
+    e.preventDefault();
+
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    signInWithEmail(email, password)
+      .then((res) => {
+        setUser(res.user);
+
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Sign in Successful",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate("/");
+      })
+      .catch(() => {
+        setError("Something Went Wrong");
+      });
+  };
+
   return (
-    <div className="flex flex-col md:flex-row h-screen bg-primary-lightest ">
+    <div className="flex flex-col md:flex-row h-screen bg-primary-lightest mt-4 md:mt-0">
       {/* Left Section - Illustration */}
       <div className="flex-1 flex items-center md:justify-end justify-center px-6 ">
         <div className="max-w-md w-full bg-white rounded-lg shadow-2xl p-6 border-2 border-primary-dark">
@@ -19,7 +72,7 @@ const Login = () => {
             Enter your details for login
           </h2>
 
-          <form>
+          <form onSubmit={handleLoginWithEmailandPass}>
             {/* Email Field */}
             <div className="mb-2">
               <label
@@ -32,7 +85,7 @@ const Login = () => {
                 <FaEnvelope className="text-primary-dark" />
                 <input
                   type="email"
-                  id="email"
+                  name="email"
                   placeholder="you@example.com"
                   className="w-full p-2 focus:outline-none"
                 />
@@ -61,7 +114,7 @@ const Login = () => {
                 </button>
                 <input
                   type={showPass ? "text" : "password"}
-                  id="password"
+                  name="password"
                   placeholder="••••••••"
                   className="w-full p-2 focus:outline-none"
                 />
@@ -94,7 +147,10 @@ const Login = () => {
 
           {/* Social Media Login */}
           <div className="flex justify-center gap-4">
-            <button className="flex items-center justify-center w-12 h-12 bg-gray-200 rounded-full hover:bg-gray-300 transition">
+            <button
+              className="flex items-center justify-center w-12 h-12 bg-gray-200 rounded-full hover:bg-gray-300 transition"
+              onClick={handleLoginWithGoogleEmail}
+            >
               <FaGoogle className="text-xl text-gray-600" />
             </button>
             {/* <button className="flex items-center justify-center w-12 h-12 bg-gray-200 rounded-full hover:bg-gray-300 transition">
