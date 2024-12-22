@@ -1,13 +1,32 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const user = true; // Replace with user state or context
+  const user = false; // Replace with user state or context
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Handle scroll event to toggle navbar transparency
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <nav className="bg-primary-darkest text-primary-light shadow-md">
+    <nav
+      className={`${
+        isScrolled ? "bg-opacity-95 bg-primary-darkest" : "bg-primary-darkest"
+      } text-primary-light bg-primary-darkest shadow-md sticky top-0 z-50 transition duration-300 navbarIndex`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
@@ -56,7 +75,7 @@ const Navbar = () => {
                       className="w-10 h-10 rounded-full border-2 border-primary"
                     />
                   </button>
-                  <button className=" p-2  text-primary-light font-medium rounded-md hover:bg-primary-dark  transition">
+                  <button className="p-2 text-primary-light font-medium rounded-md hover:bg-primary-dark transition">
                     Log out
                   </button>
                 </div>
@@ -95,7 +114,6 @@ const Navbar = () => {
             <button
               className="md:hidden flex items-center"
               onClick={() => setMobileMenuOpen((prev) => !prev)}
-              // onBlur={() => setMobileMenuOpen(false)}
             >
               <span className="sr-only">Open Mobile Menu</span>
               <svg
@@ -119,16 +137,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-primary-dark  ">
-          <div className="p-4">
-            <img
-              src="https://via.placeholder.com/40" // Replace with user.photoURL
-              alt="User Profile"
-              className="w-14 h-14 rounded-full border-2 border-primary"
-            />
-            <h1 className="my-3 font-bold text-xl">Shakir Hasan</h1>
-            <hr className="" />
-          </div>
+        <div className="md:hidden bg-primary-dark">
           <ul className="flex flex-col space-y-2 px-4 py-2">
             <li>
               <Link
@@ -146,34 +155,6 @@ const Navbar = () => {
                 Lost & Found Items
               </Link>
             </li>
-            {user && (
-              <>
-                <li>
-                  <Link
-                    to="/add-item"
-                    className="block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition"
-                  >
-                    Add Lost & Found Item
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/recovered-items"
-                    className="block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition"
-                  >
-                    All Recovered Items
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/my-items"
-                    className="block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition"
-                  >
-                    Manage My Items
-                  </Link>
-                </li>
-              </>
-            )}
           </ul>
         </div>
       )}

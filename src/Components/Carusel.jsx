@@ -35,18 +35,9 @@ export function Carusal() {
                 <Button
                   size="lg"
                   color="white"
-                  className="bg-primary-light text-primary-dark font-medium rounded-md hover:bg-primary-medium hover:text-primary-light transition font-primary"
+                  className=" px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition"
                 >
                   Report Lost Item
-                </Button>
-              </Link>
-              <Link to={"/recovered-items"}>
-                <Button
-                  size="lg"
-                  variant="text"
-                  className="text-white border-white hover:bg-primary-teal hover:text-black transition font-primary"
-                >
-                  View Recovered Items
                 </Button>
               </Link>
             </div>
@@ -83,7 +74,7 @@ export function Carusal() {
               <Button
                 size="lg"
                 color="white"
-                className="bg-primary-light text-primary-dark font-medium rounded-md hover:bg-primary-medium hover:text-primary-light transition font-primary"
+                className="px-4 py-2 text-center hover:bg-primary-dark hover:text-primary-light transition"
               >
                 Add Found Item
               </Button>
@@ -121,7 +112,7 @@ export function Carusal() {
               <Button
                 size="lg"
                 color="white"
-                className="bg-primary-light text-primary-dark font-medium rounded-md hover:bg-primary-medium hover:text-primary-light transition font-primary"
+                className=" px-4 py-2  text-center hover:bg-primary-dark hover:text-primary-light transition"
               >
                 Manage My Items
               </Button>
