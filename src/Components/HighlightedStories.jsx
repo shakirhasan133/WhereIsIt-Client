@@ -43,7 +43,7 @@ const HighlightedStories = () => {
           {stories.map((story) => (
             <div
               key={story.id}
-              className="bg-white shadow-md rounded-lg overflow-hidden transition hover:shadow-xl hover:border border-primary-light hover:-translate-y-1 duration-300"
+              className="bg-white shadow-md rounded-lg overflow-hidden transition hover:shadow-xl    hover:-translate-y-1 duration-300"
             >
               <div className="p-6 flex flex-col items-center text-center">
                 <div className="w-20 h-20 rounded-full overflow-hidden mb-4">

@@ -10,7 +10,9 @@ const MainPage = () => {
       <Carusal></Carusal>
       <LatestItems></LatestItems>
       <HowItWorks></HowItWorks>
-      <CommunityStats></CommunityStats>
+      <div className="bg-blue-gray-100">
+        <CommunityStats></CommunityStats>
+      </div>
       <HighlightedStories></HighlightedStories>
     </div>
   );

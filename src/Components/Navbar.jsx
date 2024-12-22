@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { FaSearchLocation } from "react-icons/fa";
+import { IoHome } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -28,11 +30,11 @@ const Navbar = () => {
       } text-primary-light bg-primary-darkest shadow-md sticky top-0 z-50 transition duration-300 navbarIndex`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4">
+        <div className="flex justify-between items-center py-2">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
             <div className="bg-primary-light p-2 rounded-full">
-              <span className="block w-8 h-8 rounded-full bg-primary-dark"></span>
+              <span className="block w-4 h-4 rounded-full bg-primary-dark"></span>
             </div>
             <span className="text-xl font-bold text-primary-light">
               WhereIsIt
@@ -42,25 +44,40 @@ const Navbar = () => {
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-6">
             <Link to="/" className="hover:text-primary transition duration-200">
-              Home
+              <div className="flex items-center justify-center gap-1">
+                <IoHome className="inline"></IoHome>
+                <span>Home</span>
+              </div>
             </Link>
             <Link
               to="/lost-found-items"
               className="hover:text-primary transition duration-200"
             >
-              Lost & Found Items
+              <div className="flex items-center justify-center gap-1">
+                <FaSearchLocation className="inline"></FaSearchLocation>
+                <span>Lost and found item</span>
+              </div>
             </Link>
           </div>
 
           {/* Right Side Buttons */}
           <div className="flex items-center space-x-4">
             {!user ? (
-              <Link
-                to="/login"
-                className="px-4 py-2 bg-primary-light text-primary-dark font-medium rounded-md hover:bg-primary-dark hover:text-primary-light transition"
-              >
-                Log In
-              </Link>
+              <div className="flex items-center justify-center gap-2">
+                <Link
+                  to="/login"
+                  className="px-4 py-2 bg-primary-light text-primary-dark font-medium rounded-md hover:bg-primary-dark hover:text-primary-light transition"
+                >
+                  Log In
+                </Link>
+
+                <Link
+                  to="/signup"
+                  className="px-4 py-2 bg-primary-dark text-primary-white font-medium rounded-md hover:bg-primary-light hover:text-primary-darkest transition"
+                >
+                  Sign Up
+                </Link>
+              </div>
             ) : (
               <div className="relative">
                 <div className="flex items-center justify-center gap-2">
