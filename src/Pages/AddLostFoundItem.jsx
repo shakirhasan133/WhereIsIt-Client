@@ -3,12 +3,14 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { AuthContext } from "../Provider/AuthContext";
 import Swal from "sweetalert2";
+import UseAxiosSecure from "../hooks/UseAxiosSecure";
 
 const AddLostFoundItem = () => {
   const { user } = useContext(AuthContext);
-
   const [date, setDate] = useState(new Date());
   const [imageURL, setimgURL] = useState(null);
+  const AxiosSecure = UseAxiosSecure();
+  const [isPending, setPending] = useState();
 
   // Handle Image Upload
   const handleImageUpload = (e) => {
@@ -32,6 +34,7 @@ const AddLostFoundItem = () => {
 
   const handlePostSubmit = (e) => {
     e.preventDefault();
+    setPending(true);
     const form = e.target;
 
     const postType = form.postType.value;
@@ -51,7 +54,28 @@ const AddLostFoundItem = () => {
       image: imageURL,
     };
 
-    console.log(postData);
+    // console.log(postData);
+    try {
+      AxiosSecure.post("/addItem", { postData })
+        .then(({ data }) => {
+          console.log({ data });
+          setPending(false);
+          Swal.fire({
+            title: "Success",
+            text: "Post Added Successfully",
+            icon: "success",
+          });
+        })
+        .catch((error) => {
+          Swal.fire({
+            title: "Something Went Wrong",
+            text: error.message,
+            icon: "error",
+          });
+        });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -192,7 +216,7 @@ const AddLostFoundItem = () => {
             type="submit"
             className="w-full bg-primary hover:bg-primary-dark text-white py-3 rounded-lg text-lg font-medium transition focus:outline-none focus:ring-2 focus:ring-primary"
           >
-            Add Post
+            {isPending ? "Saving..." : "Add Post"}
           </button>
         </div>
       </form>

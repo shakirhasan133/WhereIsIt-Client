@@ -30,7 +30,7 @@ export const router = createBrowserRouter([
         element: <AllItems></AllItems>,
       },
       {
-        path: "/items/:id",
+        path: "/details/:id",
         element: <PostDetails></PostDetails>,
       },
       {

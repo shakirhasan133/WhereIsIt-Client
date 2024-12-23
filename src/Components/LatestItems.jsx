@@ -1,26 +1,20 @@
 /* eslint-disable react/no-unescaped-entities */
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const LatestItems = () => {
-  const sampleItems = [
-    {
-      id: 1,
-      title: "Lost Wallet",
-      description: "Black leather wallet lost near the metro station.",
-      imageUrl: "https://via.placeholder.com/300x200",
-      location: "Metro Station",
-      date: "2024-12-20",
-    },
-    {
-      id: 2,
-      title: "Found Keys",
-      description: "Set of car keys with a red keychain found in the park.",
-      imageUrl: "https://via.placeholder.com/300x200",
-      location: "City Park",
-      date: "2024-12-19",
-    },
-    // Add more items...
-  ];
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const fetchAllPost = async () => {
+      const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/Post`);
+      setItems(data);
+    };
+    fetchAllPost();
+  }, []);
+
+  console.log(items);
 
   return (
     <section className="py-10 bg-primary-lightest text-primary-dark">
@@ -37,13 +31,13 @@ const LatestItems = () => {
 
         {/* Items Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {sampleItems.slice(0, 6).map((item) => (
+          {items.slice(0, 6).map((item) => (
             <div
-              key={item.id}
+              key={item._id}
               className="bg-primary-light shadow-md rounded-lg overflow-hidden"
             >
               <img
-                src={item.imageUrl}
+                src={item.image}
                 alt={item.title}
                 className="h-48 w-full object-cover"
               />
@@ -61,10 +55,10 @@ const LatestItems = () => {
                 </p>
                 <p className="text-sm text-primary-dark mb-4">
                   <strong>Date:</strong>{" "}
-                  {new Date(item.date).toLocaleDateString()}
+                  {new Date(item.postDate).toLocaleDateString()}
                 </p>
                 <Link
-                  to={`/details/${item.id}`}
+                  to={`/details/${item._id}`}
                   className="inline-block  py-2 text-sm bg-primary-teal text-white font-medium rounded-md hover:bg-primary-medium transition font-primary"
                 >
                   View Details
@@ -77,7 +71,7 @@ const LatestItems = () => {
         {/* See All Button */}
         <div className="text-center mt-8">
           <Link
-            to="/lost-found-items"
+            to="/allitems"
             className="px-6 py-2 bg-primary-dark text-primary-light text-sm font-medium rounded-md hover:bg-primary-teal hover:text-black transition font-primary"
           >
             See All Items

@@ -9,17 +9,8 @@ import Swal from "sweetalert2";
 const Login = () => {
   const navigate = useNavigate();
 
-  const {
-    signInWithGoogleEmail,
-    signUpWithEmail,
-    signInWithEmail,
-    Loading,
-    setLoading,
-    user,
-    setUser,
-    error,
-    setError,
-  } = useContext(AuthContext);
+  const { signInWithGoogleEmail, signInWithEmail, setUser, error, setError } =
+    useContext(AuthContext);
   const [showPass, setShowPass] = useState(false);
 
   // Log in with Google
@@ -31,14 +22,14 @@ const Login = () => {
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
+        setError(error.message);
       });
   };
 
   // Log in with Email and password
   const handleLoginWithEmailandPass = (e) => {
     e.preventDefault();
-
+    setError("");
     const email = e.target.email.value;
     const password = e.target.password.value;
 
@@ -137,7 +128,7 @@ const Login = () => {
               Log In
             </button>
           </form>
-
+          {error && <p className="text-red-500 py-2">{error}</p>}
           {/* Divider */}
           <div className="flex items-center my-4">
             <hr className="flex-grow border-t border-gray-300" />
