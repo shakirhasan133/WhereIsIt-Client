@@ -3,6 +3,9 @@ import HomeLayout from "../Layout/HomeLayout";
 import MainPage from "../Pages/MainPage";
 import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
+import AllItems from "../Pages/AllItems";
+import PostDetails from "../Pages/PostDetails";
+import AddLostFoundItem from "../Pages/AddLostFoundItem";
 
 export const router = createBrowserRouter([
   {
@@ -21,6 +24,18 @@ export const router = createBrowserRouter([
       {
         path: "/signup",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "/allitems",
+        element: <AllItems></AllItems>,
+      },
+      {
+        path: "/items/:id",
+        element: <PostDetails></PostDetails>,
+      },
+      {
+        path: "/addItems",
+        element: <AddLostFoundItem></AddLostFoundItem>,
       },
     ],
   },

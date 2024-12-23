@@ -4,6 +4,8 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateCurrentUser,
+  updateProfile,
 } from "firebase/auth";
 import { AuthContext } from "./AuthContext";
 import { auth, provider } from "../Firebase/firebase.config";
@@ -17,22 +19,33 @@ const AuthProvider = ({ children }) => {
 
   // Sign in with Google
   const signInWithGoogleEmail = () => {
+    setLoading(true);
     return signInWithPopup(auth, provider);
   };
 
   //   Sign Up With Email
   const signUpWithEmail = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   //   Sign in with Email
   const signInWithEmail = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   //   SignOut
   const signOutUser = () => {
     return signOut(auth);
+  };
+
+  // Update User Name and profile Photo
+  const updateUserData = (name, photo) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: photo,
+    });
   };
 
   //   Observer
@@ -57,6 +70,7 @@ const AuthProvider = ({ children }) => {
     signOutUser,
     error,
     setError,
+    updateUserData,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

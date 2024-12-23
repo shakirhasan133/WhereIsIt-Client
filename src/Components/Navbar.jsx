@@ -79,7 +79,7 @@ const Navbar = () => {
               </div>
             </Link>
             <Link
-              to="/lost-found-items"
+              to="/allitems"
               className="hover:text-primary transition duration-200"
             >
               <div className="flex items-center justify-center gap-1">
@@ -112,8 +112,15 @@ const Navbar = () => {
                 <div className="flex items-center justify-center gap-2">
                   <button
                     className="hidden md:block"
-                    onClick={() => setDropdownOpen((prev) => !prev)}
-                    onBlur={() => setDropdownOpen(false)}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      setDropdownOpen((prev) => !prev);
+                    }}
+                    onBlur={() => {
+                      setTimeout(() => {
+                        setDropdownOpen(false);
+                      }, 300);
+                    }}
                   >
                     <img
                       src={user.photoURL} // Replace with user.photoURL
@@ -132,7 +139,7 @@ const Navbar = () => {
                 {isDropdownOpen && (
                   <div className="absolute w-[250px] right-0 mt-2 bg-primary-light text-primary-dark rounded-md shadow-lg z-10">
                     <Link
-                      to="/add-item"
+                      to="/addItems"
                       className="block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition"
                     >
                       Add Lost & Found Item

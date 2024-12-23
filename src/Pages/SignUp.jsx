@@ -7,8 +7,14 @@ import { AuthContext } from "../Provider/AuthContext";
 import Swal from "sweetalert2";
 
 const SignUp = () => {
-  const { signInWithGoogleEmail, setUser, signUpWithEmail, error, setError } =
-    useContext(AuthContext);
+  const {
+    signInWithGoogleEmail,
+    setUser,
+    signUpWithEmail,
+    error,
+    setError,
+    updateUserData,
+  } = useContext(AuthContext);
   const navigate = useNavigate();
 
   setError("");
@@ -33,15 +39,20 @@ const SignUp = () => {
 
     signUpWithEmail(email, password)
       .then((res) => {
-        setUser(res.user);
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Sign up Successful",
-          showConfirmButton: false,
-          timer: 1500,
-        });
-        navigate("/");
+        updateUserData(name, photo)
+          .then(() => {
+            setUser(res.user);
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: "Sign up Successful",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+
+            navigate("/");
+          })
+          .catch((error) => console.log(error));
       })
       .catch((error) => {
         if (error.message == "Firebase: Error (auth/invalid-email).") {
