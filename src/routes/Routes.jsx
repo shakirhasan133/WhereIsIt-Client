@@ -6,6 +6,8 @@ import SignUp from "../Pages/SignUp";
 import AllItems from "../Pages/AllItems";
 import PostDetails from "../Pages/PostDetails";
 import AddLostFoundItem from "../Pages/AddLostFoundItem";
+import PrivateRoutes from "./PrivateRoutes";
+import AllRecoveredItems from "../Pages/AllRecoveredItems";
 
 export const router = createBrowserRouter([
   {
@@ -31,11 +33,27 @@ export const router = createBrowserRouter([
       },
       {
         path: "/details/:id",
-        element: <PostDetails></PostDetails>,
+        element: (
+          <PrivateRoutes>
+            <PostDetails></PostDetails>
+          </PrivateRoutes>
+        ),
       },
       {
         path: "/addItems",
-        element: <AddLostFoundItem></AddLostFoundItem>,
+        element: (
+          <PrivateRoutes>
+            <AddLostFoundItem></AddLostFoundItem>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/allRecovered",
+        element: (
+          <PrivateRoutes>
+            <AllRecoveredItems></AllRecoveredItems>
+          </PrivateRoutes>
+        ),
       },
     ],
   },

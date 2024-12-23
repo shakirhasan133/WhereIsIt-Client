@@ -52,6 +52,7 @@ const AddLostFoundItem = () => {
       location,
       postDate,
       image: imageURL,
+      isRecovered: false,
     };
 
     // console.log(postData);

@@ -145,7 +145,7 @@ const Navbar = () => {
                       Add Lost & Found Item
                     </Link>
                     <Link
-                      to="/recovered-items"
+                      to="/allRecovered"
                       className="block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition"
                     >
                       All Recovered Items
@@ -215,7 +215,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to="/recovered-items"
+                    to="/allRecovered"
                     className="block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition"
                   >
                     All Recovered Item
