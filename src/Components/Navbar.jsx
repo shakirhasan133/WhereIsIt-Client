@@ -6,6 +6,7 @@ import { RiMenu3Fill } from "react-icons/ri";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthContext";
 import Swal from "sweetalert2";
+import logo from "../assets/WhereIsItLogo.png";
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
@@ -62,8 +63,8 @@ const Navbar = () => {
         <div className="flex justify-between items-center py-2">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
-            <div className="bg-primary-light p-2 rounded-full">
-              <span className="block w-4 h-4 rounded-full bg-primary-dark"></span>
+            <div className=" rounded-full">
+              <img src={logo} alt="" className="w-9 h-9 rounded-full" />
             </div>
             <span className="text-xl font-bold text-primary-light">
               WhereIsIt

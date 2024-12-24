@@ -50,7 +50,7 @@ const AllItems = () => {
       </h1>
 
       {/* Search Input */}
-      <div className="flex flex-col md:flex-row items-center justify-center mb-6 gap-1">
+      <div className="flex flex-row items-center justify-center mb-6 gap-1">
         <input
           type="text"
           placeholder="Search by title or location..."

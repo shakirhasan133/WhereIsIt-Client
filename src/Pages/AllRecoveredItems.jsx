@@ -46,11 +46,11 @@ const AllRecoveredItems = () => {
         >
           {isTableLayout ? (
             <>
-              <FaTh className="text-lg" /> Card Layout
+              <FaTh className="text-lg" />
             </>
           ) : (
             <>
-              <FaTable className="text-lg" /> Table Layout
+              <FaTable className="text-lg" />
             </>
           )}
         </button>
@@ -99,7 +99,7 @@ const AllRecoveredItems = () => {
       ) : (
         // Card Layout
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {recoveredItems.map((item, index) => (
+          {recoveredItems.map((item) => (
             <div
               key={item._id}
               className="bg-white border border-primary-light rounded-lg shadow-md p-4 hover:shadow-lg transition"

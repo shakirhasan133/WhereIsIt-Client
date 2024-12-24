@@ -1,6 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const LatestItems = () => {
@@ -40,27 +41,30 @@ const LatestItems = () => {
                 className="h-48 w-full object-cover"
               />
               <div className="p-4">
-                <h3 className="text-xl font-semibold mb-2 font-primary">
+                <h3 className="text-2xl font-semibold mb-2 font-primary">
                   {item.title}
                 </h3>
-                <p className="text-sm text-primary-medium opacity-90 mb-4">
+                <p className="text-md text-primary-medium opacity-90 mb-4">
                   {item.description.length > 60
                     ? `${item.description.slice(0, 60)}...`
                     : item.description}
                 </p>
-                <p className="text-sm text-primary-dark mb-4">
+                <p className="text-md text-primary-dark mb-4">
                   <strong>Location:</strong> {item.location}
                 </p>
-                <p className="text-sm text-primary-dark mb-4">
+                <p className="text-md text-primary-dark mb-4">
                   <strong>Date:</strong>{" "}
                   {new Date(item.postDate).toLocaleDateString()}
                 </p>
-                <Link
-                  to={`/details/${item._id}`}
-                  className="inline-block  py-2 text-sm bg-primary-teal text-white font-medium rounded-md hover:bg-primary-medium transition font-primary"
-                >
-                  View Details
-                </Link>
+                <div className=" text-center py-2">
+                  <Link
+                    to={`/details/${item._id}`}
+                    className=" bg-primary-dark flex items-center justify-center gap-1 text-white font-bold py-2 px-4 rounded-lg hover:bg-primary-darkest transition"
+                  >
+                    <span>View Details </span>
+                    <FaArrowRight></FaArrowRight>
+                  </Link>
+                </div>
               </div>
             </div>
           ))}
