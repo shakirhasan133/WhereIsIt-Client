@@ -53,6 +53,8 @@ const AddLostFoundItem = () => {
       postDate,
       image: imageURL,
       isRecovered: false,
+      email: user.email,
+      userName: user.displayName,
     };
 
     // console.log(postData);
@@ -66,6 +68,7 @@ const AddLostFoundItem = () => {
             text: "Post Added Successfully",
             icon: "success",
           });
+          form.reset();
         })
         .catch((error) => {
           Swal.fire({
@@ -73,6 +76,7 @@ const AddLostFoundItem = () => {
             text: error.message,
             icon: "error",
           });
+          setPending(false);
         });
     } catch (error) {
       console.log(error);
@@ -97,6 +101,7 @@ const AddLostFoundItem = () => {
             <select
               className="w-full border border-primary-dark rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
               name="postType"
+              required
             >
               <option selected disabled>
                 Select Post Type
@@ -112,6 +117,7 @@ const AddLostFoundItem = () => {
               Thumbnail (Image Upload)
             </label>
             <input
+              required
               type="file"
               accept="image/*"
               onChange={handleImageUpload}
@@ -125,6 +131,7 @@ const AddLostFoundItem = () => {
               Title
             </label>
             <input
+              required
               type="text"
               name="title"
               className="w-full border border-primary-dark rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
@@ -138,6 +145,7 @@ const AddLostFoundItem = () => {
               Description
             </label>
             <textarea
+              required
               className="w-full border border-primary-dark rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
               //   rows="4"
               name="description"
@@ -153,6 +161,7 @@ const AddLostFoundItem = () => {
             <select
               className="w-full border border-primary-dark rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
               name="category"
+              required
             >
               <option selected disabled>
                 Select Category
@@ -170,6 +179,7 @@ const AddLostFoundItem = () => {
               Location
             </label>
             <input
+              required
               type="text"
               name="location"
               className="w-full border border-primary-dark rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
@@ -183,6 +193,7 @@ const AddLostFoundItem = () => {
               Date Lost or Found
             </label>
             <DatePicker
+              required
               selected={date}
               onChange={(date) => setDate(date)}
               className="w-full border border-primary-dark rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"

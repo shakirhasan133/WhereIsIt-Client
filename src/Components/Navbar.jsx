@@ -151,7 +151,7 @@ const Navbar = () => {
                       All Recovered Items
                     </Link>
                     <Link
-                      to="/my-items"
+                      to="/myItems"
                       className="block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition"
                     >
                       Manage My Items
@@ -223,7 +223,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to="/my-items"
+                    to="/myItems"
                     className="block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition"
                   >
                     Manage My Item

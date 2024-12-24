@@ -8,6 +8,8 @@ import PostDetails from "../Pages/PostDetails";
 import AddLostFoundItem from "../Pages/AddLostFoundItem";
 import PrivateRoutes from "./PrivateRoutes";
 import AllRecoveredItems from "../Pages/AllRecoveredItems";
+import ManageMyItems from "../Pages/ManageMyItems";
+import UpdateItem from "../Pages/UpdateItem";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +38,22 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoutes>
             <PostDetails></PostDetails>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/updateItems/:id",
+        element: (
+          <PrivateRoutes>
+            <UpdateItem></UpdateItem>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/myItems",
+        element: (
+          <PrivateRoutes>
+            <ManageMyItems></ManageMyItems>
           </PrivateRoutes>
         ),
       },
