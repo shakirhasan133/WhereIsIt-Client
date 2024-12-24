@@ -12,6 +12,7 @@ import ManageMyItems from "../Pages/ManageMyItems";
 import UpdateItem from "../Pages/UpdateItem";
 import ErrorPage from "../Pages/ErrorPage";
 import ForgetPassword from "../Pages/ForgetPassword";
+import ShortReview from "../Pages/ShortReview";
 
 export const router = createBrowserRouter([
   {
@@ -72,6 +73,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoutes>
             <AllRecoveredItems></AllRecoveredItems>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/addStory",
+        element: (
+          <PrivateRoutes>
+            <ShortReview></ShortReview>
           </PrivateRoutes>
         ),
       },

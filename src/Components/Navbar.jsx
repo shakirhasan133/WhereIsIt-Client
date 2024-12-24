@@ -139,7 +139,7 @@ const Navbar = () => {
                     }}
                   >
                     <img
-                      src={user.photoURL} // Replace with user.photoURL
+                      src={user.photoURL}
                       alt="User Profile"
                       className="w-10 h-10 rounded-full border-2 border-primary object-contain p-[2px] hover:scale-110 transition-all"
                       referrerPolicy="no-referrer"
@@ -189,6 +189,18 @@ const Navbar = () => {
                       }
                     >
                       Manage My Items
+                    </NavLink>
+                    <NavLink
+                      to="/addStory"
+                      className={({ isActive }) =>
+                        `block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition ${
+                          isActive
+                            ? "bg-primary-dark text-primary-light transition"
+                            : ""
+                        }`
+                      }
+                    >
+                      Add Story
                     </NavLink>
 
                     {/* <button
