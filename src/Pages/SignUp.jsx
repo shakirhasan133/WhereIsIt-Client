@@ -1,28 +1,26 @@
 import Lottie from "lottie-react";
 import { FaGoogle } from "react-icons/fa";
 import signupAnimation from "../assets/signup.json"; // Replace with your signup animation JSON file
-import { Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthContext";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
 
 const SignUp = () => {
-  const {
-    signInWithGoogleEmail,
-    setUser,
-    signUpWithEmail,
-    error,
-    setError,
-    updateUserData,
-  } = useContext(AuthContext);
+  const { signInWithGoogleEmail, setUser, signUpWithEmail, updateUserData } =
+    useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state || "/";
+  const [isError, setIsError] = useState("");
 
-  setError("");
+  //
 
   // Register New User
   const handleRegisterNewUser = (e) => {
     e.preventDefault();
+    setIsError("");
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
@@ -32,16 +30,16 @@ const SignUp = () => {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 
     if (!passwordRegex.test(password)) {
-      setError(
+      setIsError(
         "Password must be at lest one upper case, one lowercase, and six character"
       );
       return;
     }
 
-    signUpWithEmail(email, password)
-      .then((res) => {
-        updateUserData(name, photo)
-          .then(() => {
+    try {
+      signUpWithEmail(email, password)
+        .then((res) => {
+          updateUserData(name, photo).then(() => {
             setUser(res.user);
             Swal.fire({
               position: "center",
@@ -51,15 +49,17 @@ const SignUp = () => {
               timer: 1500,
             });
 
-            navigate("/");
-          })
-          .catch((error) => console.log(error));
-      })
-      .catch((error) => {
-        if (error.message == "Firebase: Error (auth/invalid-email).") {
-          setError("This email already used");
-        }
-      });
+            navigate(from);
+          });
+        })
+        .catch((error) => {
+          if (error.message == "Firebase: Error (auth/invalid-email).") {
+            setIsError("This email already used");
+          }
+        });
+    } catch {
+      setIsError("Something Went Wrong");
+    }
   };
 
   // Log in with Google
@@ -192,7 +192,7 @@ const SignUp = () => {
             </button>
           </form>
 
-          {error ? <p className="text-red-500 py-2">{error}</p> : ""}
+          {isError && <p className="text-red-500 py-2">{isError}</p>}
           {/* Divider */}
           <div className="flex items-center my-4">
             <hr className="flex-grow border-t border-gray-300" />

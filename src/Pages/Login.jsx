@@ -2,17 +2,19 @@ import Lottie from "lottie-react";
 import { FaGoogle, FaEnvelope, FaEye, FaEyeSlash } from "react-icons/fa";
 import loginAnimation from "../assets/login.json";
 import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthContext";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
 
 const Login = () => {
   const navigate = useNavigate();
-
-  const { signInWithGoogleEmail, signInWithEmail, setUser, error, setError } =
+  const { signInWithGoogleEmail, signInWithEmail, setUser } =
     useContext(AuthContext);
   const [showPass, setShowPass] = useState(false);
+  const location = useLocation();
+  const from = location?.state || "/";
+  const [isError, setIsError] = useState("");
 
   // Log in with Google
 
@@ -20,17 +22,17 @@ const Login = () => {
     signInWithGoogleEmail()
       .then((res) => {
         setUser(res.user);
-        navigate("/");
+        navigate(from);
       })
       .catch((error) => {
-        setError(error.message);
+        setIsError(error.message);
       });
   };
 
   // Log in with Email and password
   const handleLoginWithEmailandPass = (e) => {
     e.preventDefault();
-    setError("");
+    setIsError("");
     const email = e.target.email.value;
     const password = e.target.password.value;
 
@@ -45,10 +47,10 @@ const Login = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate("/");
+        navigate(from);
       })
       .catch(() => {
-        setError("Something Went Wrong");
+        setIsError("Something Went Wrong");
       });
   };
 
@@ -132,7 +134,7 @@ const Login = () => {
               Log In
             </button>
           </form>
-          {error && <p className="text-red-500 py-2">{error}</p>}
+          {isError && <p className="text-red-500 py-2">{isError}</p>}
           {/* Divider */}
           <div className="flex items-center my-4">
             <hr className="flex-grow border-t border-gray-300" />
@@ -159,7 +161,7 @@ const Login = () => {
           {/* Signup Link */}
           <p className="text-center mt-6 text-sm text-gray-600">
             Don’t have an account?{" "}
-            <Link to="/signup" className="text-primary font-bold">
+            <Link to="/signup" className="text-primary font-bold" state={from}>
               Sign Up here
             </Link>
           </p>
