@@ -3,7 +3,7 @@ import { FaSearchLocation } from "react-icons/fa";
 import { IoMdCloseCircle } from "react-icons/io";
 import { IoHome } from "react-icons/io5";
 import { RiMenu3Fill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthContext";
 import Swal from "sweetalert2";
 
@@ -72,21 +72,36 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-6">
-            <Link to="/" className="hover:text-primary transition duration-200">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                `hover:text-primary transition duration-200 ${
+                  isActive
+                    ? "border-b-2 text-white transition-all scale-105"
+                    : ""
+                }`
+              }
+            >
               <div className="flex items-center justify-center gap-1">
                 <IoHome className="inline"></IoHome>
                 <span>Home</span>
               </div>
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to="/allitems"
-              className="hover:text-primary transition duration-200"
+              className={({ isActive }) =>
+                `hover:text-primary transition duration-200 ${
+                  isActive
+                    ? "border-b-2 text-white transition-all scale-105"
+                    : ""
+                }`
+              }
             >
               <div className="flex items-center justify-center gap-1">
                 <FaSearchLocation className="inline"></FaSearchLocation>
                 <span>Lost and found item</span>
               </div>
-            </Link>
+            </NavLink>
           </div>
 
           {/* Right Side Buttons */}
@@ -125,7 +140,7 @@ const Navbar = () => {
                     <img
                       src={user.photoURL} // Replace with user.photoURL
                       alt="User Profile"
-                      className="w-10 h-10 rounded-full border-2 border-primary object-contain p-[2px]"
+                      className="w-10 h-10 rounded-full border-2 border-primary object-contain p-[2px] hover:scale-110 transition-all"
                       referrerPolicy="no-referrer"
                     />
                   </button>
@@ -138,24 +153,42 @@ const Navbar = () => {
                 </div>
                 {isDropdownOpen && (
                   <div className="absolute w-[250px] right-0 mt-2 bg-primary-light text-primary-dark rounded-md shadow-lg z-10">
-                    <Link
+                    <NavLink
                       to="/addItems"
-                      className="block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition"
+                      className={({ isActive }) =>
+                        `block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition${
+                          isActive
+                            ? "bg-primary-dark text-primary-light transition"
+                            : ""
+                        }`
+                      }
                     >
                       Add Lost & Found Item
-                    </Link>
-                    <Link
+                    </NavLink>
+                    <NavLink
                       to="/allRecovered"
-                      className="block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition"
+                      className={({ isActive }) =>
+                        `block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition ${
+                          isActive
+                            ? "bg-primary-dark text-primary-light transition"
+                            : ""
+                        }`
+                      }
                     >
                       All Recovered Items
-                    </Link>
-                    <Link
+                    </NavLink>
+                    <NavLink
                       to="/myItems"
-                      className="block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition"
+                      className={({ isActive }) =>
+                        `block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition ${
+                          isActive
+                            ? "bg-primary-dark text-primary-light transition"
+                            : ""
+                        }`
+                      }
                     >
                       Manage My Items
-                    </Link>
+                    </NavLink>
 
                     {/* <button
                       onClick={() => alert("Logged Out")} // Replace with sign-out logic
@@ -188,46 +221,76 @@ const Navbar = () => {
         <div className="md:hidden bg-primary-darkest w-3/4 h-screen float-end absolute right-0">
           <ul className="flex flex-col  px-4 py-2 justify-center ">
             <li>
-              <Link
+              <NavLink
                 to="/"
-                className="block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition"
+                className={({ isActive }) =>
+                  `block px-4 py-2 w-full text-left  ${
+                    isActive
+                      ? "bg-primary-dark text-primary-light transition"
+                      : ""
+                  }`
+                }
               >
                 Home
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
-                to="/lost-found-items"
-                className="block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition"
+              <NavLink
+                to="/allitems"
+                className={({ isActive }) =>
+                  `block px-4 py-2 w-full text-left  ${
+                    isActive
+                      ? "bg-primary-dark text-primary-light transition"
+                      : ""
+                  }`
+                }
               >
                 Lost & Found Items
-              </Link>
+              </NavLink>
             </li>
             {user ? (
               <ul>
                 <li>
-                  <Link
-                    to="/add-item"
-                    className="block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition"
+                  <NavLink
+                    to="/addItems"
+                    className={({ isActive }) =>
+                      `block px-4 py-2 w-full text-left  ${
+                        isActive
+                          ? "bg-primary-dark text-primary-light transition"
+                          : ""
+                      }`
+                    }
                   >
                     Add Lost and Found Item
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link
+                  <NavLink
                     to="/allRecovered"
-                    className="block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition"
+                    className={({ isActive }) =>
+                      `block px-4 py-2 w-full text-left ${
+                        isActive
+                          ? "bg-primary-dark text-primary-light transition"
+                          : ""
+                      }`
+                    }
                   >
                     All Recovered Item
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <Link
+                  <NavLink
                     to="/myItems"
-                    className="block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition"
+                    className={({ isActive }) =>
+                      `block px-4 py-2 w-full text-left ${
+                        isActive
+                          ? " bg-primary-dark text-primary-light transition"
+                          : ""
+                      }`
+                    }
                   >
                     Manage My Item
-                  </Link>
+                  </NavLink>
                 </li>
               </ul>
             ) : (
@@ -254,7 +317,7 @@ const Navbar = () => {
             ) : (
               <div className="w-full text-center">
                 <h1 className=" py-2 w-full  hover:bg-primary-dark hover:text-primary-light transition">
-                  Shakir Hasan
+                  {user?.displayName}
                 </h1>
                 <button
                   className="px-4 py-2 text-primary-darkest w-full bg-primary font-medium rounded-md  hover:text-primary-light transition"
