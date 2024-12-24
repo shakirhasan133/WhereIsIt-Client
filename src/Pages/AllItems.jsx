@@ -26,12 +26,17 @@ const AllItems = () => {
   }, [AxiosSecure]);
 
   return (
-    <div className="bg-primary-lightest min-h-screen py-10 px-6">
+    <div className="bg-primary-lightest  py-10 px-6">
       <h1 className="text-3xl font-bold text-primary-dark text-center mb-6">
         Lost & Found Items
       </h1>
       {isPending ? (
         <LoadingPage></LoadingPage>
+      ) : items.length === 0 ? (
+        <div className="text-center bg-primary-light text-primary-dark py-10 rounded-lg shadow-md">
+          <p className="text-xl font-semibold">No Items Found</p>
+          <p>Add items to manage them here.</p>
+        </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {items.map((item) => (

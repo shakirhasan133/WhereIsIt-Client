@@ -14,8 +14,6 @@ const LatestItems = () => {
     fetchAllPost();
   }, []);
 
-  console.log(items);
-
   return (
     <section className="py-10 bg-primary-lightest text-primary-dark">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

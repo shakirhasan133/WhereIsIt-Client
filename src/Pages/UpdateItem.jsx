@@ -4,6 +4,7 @@ import { AuthContext } from "../Provider/AuthContext";
 import UseAxiosSecure from "../hooks/UseAxiosSecure";
 import Swal from "sweetalert2";
 import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const UpdateItem = () => {
   const { id } = useParams(); // Get the item ID from the route
@@ -12,7 +13,7 @@ const UpdateItem = () => {
   const [loading, setLoading] = useState(true);
   const AxiosSecure = UseAxiosSecure();
   const navigate = useNavigate();
-  const [date, setDate] = useState();
+  const [date, setDate] = useState(new Date());
 
   // Fetch item data by ID
   useEffect(() => {
@@ -20,6 +21,7 @@ const UpdateItem = () => {
       try {
         const { data } = await AxiosSecure.get(`/PostData/${id}`);
         setItemData(data);
+        setDate(data.postDate);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching item:", error);
@@ -33,18 +35,25 @@ const UpdateItem = () => {
   // Handle form submission for updates
   const handleUpdate = async (e) => {
     e.preventDefault();
-    try {
-      const updatedItem = {
-        title: e.target.title.value,
-        description: e.target.description.value,
-        category: e.target.category.value,
-        location: e.target.location.value,
-        date: e.target.date.value,
-      };
 
-      await AxiosSecure.put(`/items/${id}`, updatedItem);
-      Swal.fire("Success", "Item updated successfully!", "success");
-      navigate("/myItems");
+    const updatedItem = {
+      title: e.target.title.value,
+      description: e.target.description.value,
+      category: e.target.category.value,
+      location: e.target.location.value,
+      postDate: date,
+      email: user?.email,
+    };
+
+    try {
+      await AxiosSecure.put(`/updateItem/${id}`, updatedItem)
+        .then(() => {
+          Swal.fire("Success", "Item updated successfully!", "success");
+          navigate("/myItems");
+        })
+        .catch((error) => {
+          Swal.fire("Success", error.message, "success");
+        });
     } catch (error) {
       console.error("Error updating item:", error);
       Swal.fire("Error", "Failed to update the item.", "error");
@@ -134,7 +143,7 @@ const UpdateItem = () => {
               </label>
               <DatePicker
                 required
-                selected={itemData.postDate}
+                selected={date}
                 onChange={(date) => setDate(date)}
                 className="w-full border border-primary-dark rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
               />

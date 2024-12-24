@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthContext";
-import axios from "axios";
 import Swal from "sweetalert2";
 import UseAxiosSecure from "../hooks/UseAxiosSecure";
 import LoadingPage from "./Loading";
@@ -49,9 +48,16 @@ const ManageMyItems = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await axios.delete(`/api/items/${id}`);
-          setMyItems((prev) => prev.filter((item) => item._id !== id));
-          Swal.fire("Deleted!", "Your item has been deleted.", "success");
+          await AxiosSecure.delete(`/PostDelete/${id}`, {
+            data: { email: user?.email },
+          })
+            .then(() => {
+              setMyItems((prev) => prev.filter((item) => item._id !== id));
+              Swal.fire("Deleted!", "Your item has been deleted.", "success");
+            })
+            .catch((error) => {
+              Swal.fire("Deleted!", error.message, "success");
+            });
         } catch (error) {
           console.error("Error deleting item:", error);
         }
