@@ -31,7 +31,7 @@ export function Carusal() {
               belongings.
             </Typography>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link to={"/lost-found-items"}>
+              <Link to={"/addItems"}>
                 <Button
                   size="lg"
                   color="white"
@@ -70,7 +70,7 @@ export function Carusal() {
               make a difference by returning lost things to their rightful
               owners.
             </Typography>
-            <Link to={"/add-item"}>
+            <Link to={"/addItems"}>
               <Button
                 size="lg"
                 color="white"
@@ -108,7 +108,7 @@ export function Carusal() {
               phones to keys, these success stories highlight the power of
               connection and care.
             </Typography>
-            <Link to={"/my-items"}>
+            <Link to={"/myItems"}>
               <Button
                 size="lg"
                 color="white"

@@ -14,6 +14,8 @@ const ManageMyItems = () => {
   const AxiosSecure = UseAxiosSecure();
   const navigate = useNavigate();
 
+  console.log(user);
+
   // Fetch user's items
   useEffect(() => {
     if (user && user.email) {
@@ -69,10 +71,6 @@ const ManageMyItems = () => {
   const handleUpdate = (id) => {
     navigate(`/updateItems/${id}`);
   };
-
-  if (!user) {
-    return <LoadingPage></LoadingPage>;
-  }
 
   if (!myItems) {
     return (

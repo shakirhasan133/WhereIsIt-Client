@@ -10,11 +10,12 @@ import PrivateRoutes from "./PrivateRoutes";
 import AllRecoveredItems from "../Pages/AllRecoveredItems";
 import ManageMyItems from "../Pages/ManageMyItems";
 import UpdateItem from "../Pages/UpdateItem";
+import ErrorPage from "../Pages/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    errorElement: <p>Error 404, Page Not Found</p>,
+    errorElement: <ErrorPage></ErrorPage>,
     element: <HomeLayout></HomeLayout>,
     children: [
       {
