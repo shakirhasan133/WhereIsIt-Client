@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
-import { FaQuoteLeft } from "react-icons/fa";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import StoryCard from "./StoryCard";
 
 const HighlightedStories = () => {
-  // Sample data for highlighted stories
   const stories = [
     {
       id: 1,
@@ -30,8 +30,26 @@ const HighlightedStories = () => {
     },
   ];
 
+  const responsive = {
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+      partialVisibilityGutter: 40,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+      partialVisibilityGutter: 30,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+      partialVisibilityGutter: 30,
+    },
+  };
+
   return (
-    <section className="bg-primary-lightest py-12 px-6">
+    <section className="bg-gradient-to-b to-primary-light from-background-light py-12 px-6">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-primary-dark text-center mb-6">
           Highlighted Stories
@@ -39,39 +57,37 @@ const HighlightedStories = () => {
         <p className="text-lg text-primary-medium text-center mb-10">
           Heartwarming success stories from our amazing community.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <Carousel
+          additionalTransfrom={0}
+          arrows={false}
+          autoPlaySpeed={3000}
+          centerMode={false}
+          containerClass="container-padding-bottom"
+          dotListClass=""
+          draggable
+          focusOnSelect
+          infinite
+          itemClass=""
+          keyBoardControl
+          minimumTouchDrag={80}
+          pauseOnHover
+          renderArrowsWhenDisabled={false}
+          renderButtonGroupOutside={false}
+          renderDotsOutside={false}
+          responsive={responsive}
+          rewind={false}
+          rewindWithAnimation={false}
+          rtl={false}
+          shouldResetAutoplay
+          showDots
+          sliderClass=""
+          slidesToSlide={1}
+          swipeable
+        >
           {stories.map((story) => (
-            <div
-              key={story.id}
-              className="bg-white shadow-md rounded-lg overflow-hidden transition hover:shadow-xl    hover:-translate-y-1 duration-300"
-            >
-              <div className="p-6 flex flex-col items-center text-center">
-                <div className="w-20 h-20 rounded-full overflow-hidden mb-4">
-                  <img
-                    src={story.userImage}
-                    alt={`${story.userName}'s story`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <h3 className="text-xl font-semibold text-primary-dark mb-2">
-                  {story.userName}
-                </h3>
-                <p className="text-primary-medium text-sm italic mb-4">
-                  <FaQuoteLeft className="inline mr-2" />
-                  {story.story}
-                </p>
-                <span className="text-sm text-primary-light">{story.date}</span>
-              </div>
-            </div>
+            <StoryCard key={story.id} story={story} />
           ))}
-        </div>
-        <div className="mt-10 text-center">
-          <Link to="/success-stories">
-            <button className="px-6 py-3 bg-primary-dark text-white font-medium rounded-md hover:bg-primary-medium transition">
-              View All Stories
-            </button>
-          </Link>
-        </div>
+        </Carousel>
       </div>
     </section>
   );

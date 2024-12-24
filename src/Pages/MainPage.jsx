@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet";
 
 const MainPage = () => {
   return (
-    <div>
+    <div className="">
       <Helmet>
         <title>WhereIsIt</title>
       </Helmet>

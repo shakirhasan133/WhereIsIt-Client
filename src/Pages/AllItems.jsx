@@ -41,7 +41,7 @@ const AllItems = () => {
   };
 
   return (
-    <div className="bg-primary-lightest py-10 px-6">
+    <div className="bg-gradient-to-b from-primary-light to-background-light py-10 px-6">
       <Helmet>
         <title>All Post || WhereIsIt</title>
       </Helmet>

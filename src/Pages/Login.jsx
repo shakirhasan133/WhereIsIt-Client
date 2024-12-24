@@ -15,6 +15,7 @@ const Login = () => {
   const location = useLocation();
   const from = location?.state || "/";
   const [isError, setIsError] = useState("");
+  const [userEmail, setUserEmail] = useState("");
 
   // Log in with Google
 
@@ -55,7 +56,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-screen bg-primary-lightest mt-4 md:mt-0">
+    <div className="flex flex-col md:flex-row h-screen bg-gradient-to-b from-primary-light to-background-light mt-4 md:mt-0">
       <Helmet>
         <title>Login || WhereIsIt</title>
       </Helmet>
@@ -83,6 +84,7 @@ const Login = () => {
                 <input
                   type="email"
                   name="email"
+                  onChange={(e) => setUserEmail(e.target.value)}
                   placeholder="you@example.com"
                   className="w-full p-2 focus:outline-none"
                 />
@@ -117,12 +119,13 @@ const Login = () => {
                 />
               </div>
               <div className="text-right mt-2">
-                <a
-                  href="/forgot-password"
+                <Link
+                  to="/resetPassword"
                   className="text-sm text-primary underline"
+                  state={userEmail}
                 >
                   Forgot Password?
-                </a>
+                </Link>
               </div>
             </div>
 

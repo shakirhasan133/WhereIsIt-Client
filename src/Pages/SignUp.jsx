@@ -94,7 +94,7 @@ const SignUp = () => {
       </div>
 
       {/* Right Section - Illustration */}
-      <div className="flex-1 flex items-center md:justify-start justify-start px-3 md:px-0">
+      <div className="flex-1 flex items-center md:justify-start justify-start px-3 md:px-0 bg-gradient-to-b from-primary-light to-background-light">
         <div className="max-w-md w-full bg-white rounded-lg shadow-2xl p-6 border-2 border-primary-dark">
           <h2 className="text-2xl font-bold text-primary-dark text-center">
             Create an Account

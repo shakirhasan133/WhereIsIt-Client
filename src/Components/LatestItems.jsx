@@ -38,7 +38,7 @@ const LatestItems = () => {
               <img
                 src={item.image}
                 alt={item.title}
-                className="h-48 w-full object-cover"
+                className="h-48 w-full object-fill"
               />
               <div className="p-4">
                 <h3 className="text-2xl font-semibold mb-2 font-primary">

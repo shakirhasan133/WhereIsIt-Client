@@ -62,146 +62,148 @@ const UpdateItem = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
-      <Helmet>
-        <title>Update Post|| WhereIsIt</title>
-      </Helmet>
-      <h2 className="text-3xl font-bold text-primary-darkest text-center mb-6">
-        Update Item
-      </h2>
+    <div className="bg-gradient-to-b from-primary-light to-background-light">
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        <Helmet>
+          <title>Update Post|| WhereIsIt</title>
+        </Helmet>
+        <h2 className="text-3xl font-bold text-primary-darkest text-center mb-6">
+          Update Item
+        </h2>
 
-      {loading ? (
-        <p className="text-center text-primary-dark">Loading...</p>
-      ) : (
-        <form
-          onSubmit={handleUpdate}
-          className="bg-white p-6 rounded-lg shadow-lg space-y-6"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Title */}
-            <div>
-              <label className="block text-primary-darkest font-semibold">
-                Title
-              </label>
-              <input
-                type="text"
-                name="title"
-                defaultValue={itemData?.title}
-                required
-                className="w-full border border-primary-light rounded-lg px-4 py-2 mt-1"
-              />
+        {loading ? (
+          <p className="text-center text-primary-dark">Loading...</p>
+        ) : (
+          <form
+            onSubmit={handleUpdate}
+            className="bg-white p-6 rounded-lg shadow-lg space-y-6"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Title */}
+              <div>
+                <label className="block text-primary-darkest font-semibold">
+                  Title
+                </label>
+                <input
+                  type="text"
+                  name="title"
+                  defaultValue={itemData?.title}
+                  required
+                  className="w-full border border-primary-light rounded-lg px-4 py-2 mt-1"
+                />
+              </div>
+
+              {/* Category */}
+              <div>
+                <label className="block text-primary-darkest font-semibold">
+                  Category
+                </label>
+                <select
+                  name="category"
+                  defaultValue={itemData?.category}
+                  required
+                  className="w-full border border-primary-light rounded-lg px-4 py-2 mt-1"
+                >
+                  <option value="electronics">Electronics</option>
+                  <option value="jewelry">Jewelry</option>
+                  <option value="documents">Documents</option>
+                  <option value="others">Others</option>
+                </select>
+              </div>
             </div>
 
-            {/* Category */}
+            {/* Description */}
             <div>
               <label className="block text-primary-darkest font-semibold">
-                Category
+                Description
               </label>
-              <select
-                name="category"
-                defaultValue={itemData?.category}
+              <textarea
+                name="description"
+                defaultValue={itemData?.description}
                 required
+                rows={4}
                 className="w-full border border-primary-light rounded-lg px-4 py-2 mt-1"
+              ></textarea>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Location */}
+              <div>
+                <label className="block text-primary-darkest font-semibold">
+                  Location
+                </label>
+                <input
+                  type="text"
+                  name="location"
+                  defaultValue={itemData?.location}
+                  required
+                  className="w-full border border-primary-light rounded-lg px-4 py-2 mt-1"
+                />
+              </div>
+
+              {/* Date */}
+              <div>
+                <label className="block text-primary-darkest font-semibold">
+                  Date
+                </label>
+                <DatePicker
+                  required
+                  selected={date}
+                  onChange={(date) => setDate(date)}
+                  className="w-full border border-primary-dark rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* User Email */}
+              <div>
+                <label className="block text-primary-darkest font-semibold">
+                  User Email
+                </label>
+                <input
+                  type="email"
+                  value={user?.email}
+                  readOnly
+                  className="w-full bg-gray-100 border border-primary-light rounded-lg px-4 py-2 mt-1"
+                />
+              </div>
+
+              {/* User Name */}
+              <div>
+                <label className="block text-primary-darkest font-semibold">
+                  User Name
+                </label>
+                <input
+                  type="text"
+                  value={user?.displayName}
+                  readOnly
+                  className="w-full bg-gray-100 border border-primary-light rounded-lg px-4 py-2 mt-1"
+                />
+              </div>
+            </div>
+
+            {/* Submit Button */}
+            <div className="flex items-center  justify-center gap-3">
+              <button
+                type="submit"
+                className="bg-primary-dark text-white px-6 py-2 rounded-lg shadow hover:bg-primary-darkest transition"
               >
-                <option value="electronics">Electronics</option>
-                <option value="jewelry">Jewelry</option>
-                <option value="documents">Documents</option>
-                <option value="others">Others</option>
-              </select>
+                Update
+              </button>
+              <button
+                onClick={() => {
+                  navigate("/myItems");
+                }}
+                type="submit"
+                className="bg-primary text-white px-6 py-2 rounded-lg shadow hover:bg-primary-dark transition"
+              >
+                Cancel
+              </button>
             </div>
-          </div>
-
-          {/* Description */}
-          <div>
-            <label className="block text-primary-darkest font-semibold">
-              Description
-            </label>
-            <textarea
-              name="description"
-              defaultValue={itemData?.description}
-              required
-              rows={4}
-              className="w-full border border-primary-light rounded-lg px-4 py-2 mt-1"
-            ></textarea>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Location */}
-            <div>
-              <label className="block text-primary-darkest font-semibold">
-                Location
-              </label>
-              <input
-                type="text"
-                name="location"
-                defaultValue={itemData?.location}
-                required
-                className="w-full border border-primary-light rounded-lg px-4 py-2 mt-1"
-              />
-            </div>
-
-            {/* Date */}
-            <div>
-              <label className="block text-primary-darkest font-semibold">
-                Date
-              </label>
-              <DatePicker
-                required
-                selected={date}
-                onChange={(date) => setDate(date)}
-                className="w-full border border-primary-dark rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* User Email */}
-            <div>
-              <label className="block text-primary-darkest font-semibold">
-                User Email
-              </label>
-              <input
-                type="email"
-                value={user?.email}
-                readOnly
-                className="w-full bg-gray-100 border border-primary-light rounded-lg px-4 py-2 mt-1"
-              />
-            </div>
-
-            {/* User Name */}
-            <div>
-              <label className="block text-primary-darkest font-semibold">
-                User Name
-              </label>
-              <input
-                type="text"
-                value={user?.displayName}
-                readOnly
-                className="w-full bg-gray-100 border border-primary-light rounded-lg px-4 py-2 mt-1"
-              />
-            </div>
-          </div>
-
-          {/* Submit Button */}
-          <div className="flex items-center  justify-center gap-3">
-            <button
-              type="submit"
-              className="bg-primary-dark text-white px-6 py-2 rounded-lg shadow hover:bg-primary-darkest transition"
-            >
-              Update
-            </button>
-            <button
-              onClick={() => {
-                navigate("/myItems");
-              }}
-              type="submit"
-              className="bg-primary text-white px-6 py-2 rounded-lg shadow hover:bg-primary-dark transition"
-            >
-              Cancel
-            </button>
-          </div>
-        </form>
-      )}
+          </form>
+        )}
+      </div>
     </div>
   );
 };

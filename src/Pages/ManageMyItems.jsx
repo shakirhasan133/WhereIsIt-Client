@@ -81,68 +81,70 @@ const ManageMyItems = () => {
     );
   }
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8">
-      <Helmet>
-        <title>Manage Post || WhereIsIt</title>
-      </Helmet>
-      <h2 className="text-3xl font-bold text-primary-darkest text-center mb-6">
-        Manage My Items
-      </h2>
+    <div className="bg-gradient-to-b from-primary-light to-background-light">
+      <div className="max-w-5xl mx-auto px-4 py-8">
+        <Helmet>
+          <title>Manage Post || WhereIsIt</title>
+        </Helmet>
+        <h2 className="text-3xl font-bold text-primary-darkest text-center mb-6">
+          Manage My Items
+        </h2>
 
-      {loading ? (
-        <LoadingPage></LoadingPage>
-      ) : myItems.length === 0 ? (
-        <div className="text-center bg-primary-light text-primary-dark py-10 rounded-lg shadow-md">
-          <p className="text-xl font-semibold">No Items Found</p>
-          <p>Add items to manage them here.</p>
-        </div>
-      ) : (
-        <div className="overflow-x-auto">
-          <table className="min-w-full border border-primary-light bg-white rounded-lg shadow-md">
-            <thead className="bg-primary text-white">
-              <tr>
-                <th className="px-4 py-3 text-left">#</th>
-                <th className="px-4 py-3 text-left">Title</th>
-                <th className="px-4 py-3 text-left">Category</th>
-                <th className="px-4 py-3 text-left">Status</th>
-                <th className="px-4 py-3 text-center">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {myItems &&
-                myItems.map((item, index) => (
-                  <tr
-                    key={item._id}
-                    className={`${
-                      index % 2 === 0 ? "bg-primary-light" : "bg-white"
-                    } hover:bg-primary-lightest transition`}
-                  >
-                    <td className="px-4 py-3">{index + 1}</td>
-                    <td className="px-4 py-3">{item.title}</td>
-                    <td className="px-4 py-3 capitalize">{item.category}</td>
-                    <td className="px-4 py-3 capitalize">
-                      {item.isRecovered ? "Recovered" : "Not Recovered"}
-                    </td>
-                    <td className="px-4 py-3 flex justify-center space-x-4">
-                      <button
-                        onClick={() => handleUpdate(item._id)}
-                        className="bg-primary-dark text-white px-4 py-2 rounded-lg shadow hover:bg-primary-darkest transition"
-                      >
-                        Update
-                      </button>
-                      <button
-                        onClick={() => handleDelete(item._id)}
-                        className="bg-red-600 text-white px-4 py-2 rounded-lg shadow hover:bg-red-700 transition"
-                      >
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+        {loading ? (
+          <LoadingPage></LoadingPage>
+        ) : myItems.length === 0 ? (
+          <div className="text-center bg-primary-light text-primary-dark py-10 rounded-lg shadow-md">
+            <p className="text-xl font-semibold">No Items Found</p>
+            <p>Add items to manage them here.</p>
+          </div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="min-w-full border border-primary-light bg-white rounded-lg shadow-md">
+              <thead className="bg-primary text-white">
+                <tr>
+                  <th className="px-4 py-3 text-left">#</th>
+                  <th className="px-4 py-3 text-left">Title</th>
+                  <th className="px-4 py-3 text-left">Category</th>
+                  <th className="px-4 py-3 text-left">Status</th>
+                  <th className="px-4 py-3 text-center">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {myItems &&
+                  myItems.map((item, index) => (
+                    <tr
+                      key={item._id}
+                      className={`${
+                        index % 2 === 0 ? "bg-primary-light" : "bg-white"
+                      } hover:bg-primary-lightest transition`}
+                    >
+                      <td className="px-4 py-3">{index + 1}</td>
+                      <td className="px-4 py-3">{item.title}</td>
+                      <td className="px-4 py-3 capitalize">{item.category}</td>
+                      <td className="px-4 py-3 capitalize">
+                        {item.isRecovered ? "Recovered" : "Not Recovered"}
+                      </td>
+                      <td className="px-4 py-3 flex justify-center space-x-4">
+                        <button
+                          onClick={() => handleUpdate(item._id)}
+                          className="bg-primary-dark text-white px-4 py-2 rounded-lg shadow hover:bg-primary-darkest transition"
+                        >
+                          Update
+                        </button>
+                        <button
+                          onClick={() => handleDelete(item._id)}
+                          className="bg-red-600 text-white px-4 py-2 rounded-lg shadow hover:bg-red-700 transition"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

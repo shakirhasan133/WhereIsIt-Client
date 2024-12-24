@@ -74,7 +74,7 @@ const PostDetails = () => {
   }
 
   return (
-    <div className="bg-primary-lightest min-h-screen py-10 px-6">
+    <div className="bg-gradient-to-b from-primary-light to-background-light min-h-screen py-10 px-6">
       <Helmet>
         <title>{item?.title} || WhereIsIt</title>
       </Helmet>

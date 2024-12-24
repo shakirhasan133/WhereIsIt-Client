@@ -12,7 +12,7 @@ export function Carusal() {
           alt="Empower Dreams"
           className="h-[90vh] w-full object-cover"
         />
-        <div className="absolute inset-0 flex items-center justify-center bg-black/60">
+        <div className="absolute inset-0 flex items-center justify-center bg-black/70">
           <div className="text-center px-4 md:px-8">
             <Typography
               variant="h1"
@@ -35,7 +35,7 @@ export function Carusal() {
                 <Button
                   size="lg"
                   color="white"
-                  className=" px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition"
+                  className=" px-5 py-3 w-full text-left hover:bg-primary-dark hover:text-primary-light transition"
                 >
                   Report Lost Item
                 </Button>
@@ -52,7 +52,7 @@ export function Carusal() {
           alt="Create Campaign"
           className="h-[90vh] w-full object-cover"
         />
-        <div className="absolute inset-0 flex items-center justify-center bg-black/60">
+        <div className="absolute inset-0 flex items-center justify-center bg-black/70">
           <div className="text-center px-4 md:px-8">
             <Typography
               variant="h1"
@@ -74,7 +74,7 @@ export function Carusal() {
               <Button
                 size="lg"
                 color="white"
-                className="px-4 py-2 text-center hover:bg-primary-dark hover:text-primary-light transition"
+                className="px-5 py-3 text-center hover:bg-primary-dark hover:text-primary-light transition font-primary"
               >
                 Add Found Item
               </Button>
@@ -90,7 +90,7 @@ export function Carusal() {
           alt="Recently Recovered Items"
           className="h-[90vh] w-full object-cover"
         />
-        <div className="absolute inset-0 flex items-center justify-center bg-black/60">
+        <div className="absolute inset-0 flex items-center justify-center bg-black/70">
           <div className="text-center px-4 md:px-8">
             <Typography
               variant="h1"
@@ -112,7 +112,7 @@ export function Carusal() {
               <Button
                 size="lg"
                 color="white"
-                className=" px-4 py-2  text-center hover:bg-primary-dark hover:text-primary-light transition"
+                className=" px-5 py-3 text-center hover:bg-primary-dark hover:text-primary-light transition font-primary"
               >
                 Manage My Items
               </Button>

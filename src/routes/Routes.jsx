@@ -11,6 +11,7 @@ import AllRecoveredItems from "../Pages/AllRecoveredItems";
 import ManageMyItems from "../Pages/ManageMyItems";
 import UpdateItem from "../Pages/UpdateItem";
 import ErrorPage from "../Pages/ErrorPage";
+import ForgetPassword from "../Pages/ForgetPassword";
 
 export const router = createBrowserRouter([
   {
@@ -73,6 +74,10 @@ export const router = createBrowserRouter([
             <AllRecoveredItems></AllRecoveredItems>
           </PrivateRoutes>
         ),
+      },
+      {
+        path: "/resetPassword",
+        element: <ForgetPassword></ForgetPassword>,
       },
     ],
   },

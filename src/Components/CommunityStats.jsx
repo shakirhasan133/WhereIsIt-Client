@@ -25,7 +25,7 @@ const CommunityStats = () => {
   ];
 
   return (
-    <section className="bg-primary-lightest py-12 px-6">
+    <section className="bg-gradient-to-b from-primary-light to-background-light py-12 px-6">
       <div className="max-w-7xl mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-primary-dark mb-6">
           Our Community in Numbers

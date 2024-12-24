@@ -7,12 +7,31 @@ module.exports = withMT({
   ],
   theme: {
     extend: {
+      fontFamily: { primary: ['"Merriweather Sans"', "sans-serif"] },
       colors: {
         primary: {
-          light: "#93B1A6", // Soft mint green
-          DEFAULT: "#5C8374", // Desaturated green
-          dark: "#183D3D", // Deep teal
-          darkest: "#040D12", // Almost black green
+          light: "#B8E3EA", // Soft Aqua
+          DEFAULT: "#42C0B9", // Vibrant Teal
+          dark: "#205A67", // Deep Aqua Blue
+          darkest: "#0E2A31", // Midnight Teal
+        },
+        secondary: {
+          light: "#FFC9A9", // Soft Coral Peach
+          DEFAULT: "#FF7E5F", // Sunset Coral
+          dark: "#D15037", // Burnt Orange
+        },
+        background: {
+          light: "#F7FAFC", // Subtle Off-White
+          dark: "#1E293B", // Neutral Navy
+        },
+        text: {
+          light: "#606F7B", // Soft Slate
+          dark: "#1B1F23", // Rich Black
+        },
+        accent: {
+          light: "#FDE8E9", // Blush Pink
+          DEFAULT: "#E63946", // Bright Red
+          dark: "#940C24", // Dark Crimson
         },
       },
     },
