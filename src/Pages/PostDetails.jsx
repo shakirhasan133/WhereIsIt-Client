@@ -5,6 +5,7 @@ import { IoMdCloseCircle } from "react-icons/io";
 import DatePicker from "react-datepicker";
 import { AuthContext } from "../Provider/AuthContext";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const PostDetails = () => {
   const { id } = useParams();
@@ -74,6 +75,9 @@ const PostDetails = () => {
 
   return (
     <div className="bg-primary-lightest min-h-screen py-10 px-6">
+      <Helmet>
+        <title>{item?.title} || WhereIsIt</title>
+      </Helmet>
       <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-6 border-2 border-primary-dark">
         <img
           src={item.image}

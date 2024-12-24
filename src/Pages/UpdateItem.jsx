@@ -5,6 +5,7 @@ import UseAxiosSecure from "../hooks/UseAxiosSecure";
 import Swal from "sweetalert2";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { Helmet } from "react-helmet";
 
 const UpdateItem = () => {
   const { id } = useParams(); // Get the item ID from the route
@@ -62,6 +63,9 @@ const UpdateItem = () => {
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8">
+      <Helmet>
+        <title>Update Post|| WhereIsIt</title>
+      </Helmet>
       <h2 className="text-3xl font-bold text-primary-darkest text-center mb-6">
         Update Item
       </h2>

@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import UseAxiosSecure from "../hooks/UseAxiosSecure";
 import LoadingPage from "./Loading";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const ManageMyItems = () => {
   const { user } = useContext(AuthContext);
@@ -83,6 +84,9 @@ const ManageMyItems = () => {
   }
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
+      <Helmet>
+        <title>Manage Post || WhereIsIt</title>
+      </Helmet>
       <h2 className="text-3xl font-bold text-primary-darkest text-center mb-6">
         Manage My Items
       </h2>

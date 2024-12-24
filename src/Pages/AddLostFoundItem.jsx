@@ -4,9 +4,12 @@ import "react-datepicker/dist/react-datepicker.css";
 import { AuthContext } from "../Provider/AuthContext";
 import Swal from "sweetalert2";
 import UseAxiosSecure from "../hooks/UseAxiosSecure";
+// import { Helmet } from "react-helmet";
+import LoadingPage from "./Loading";
+import { Helmet } from "react-helmet";
 
 const AddLostFoundItem = () => {
-  const { user } = useContext(AuthContext);
+  const { user, Loading } = useContext(AuthContext);
   const [date, setDate] = useState(new Date());
   const [imageURL, setimgURL] = useState(null);
   const AxiosSecure = UseAxiosSecure();
@@ -83,8 +86,15 @@ const AddLostFoundItem = () => {
     }
   };
 
+  if (Loading) {
+    return <LoadingPage></LoadingPage>;
+  }
+
   return (
     <div className="max-w-5xl mx-auto px-6 py-8 bg-primary-light/10 rounded-lg shadow-md">
+      <Helmet>
+        <title>Add Post || WhereIsIt</title>
+      </Helmet>
       <h2 className="text-3xl font-semibold text-center text-primary-dark mb-6">
         Add Lost & Found Item
       </h2>

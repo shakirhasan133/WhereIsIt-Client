@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthContext";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const SignUp = () => {
   const {
@@ -30,12 +31,12 @@ const SignUp = () => {
 
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 
-    // if (!passwordRegex.test(password)) {
-    //   setError(
-    //     "Password must be at lest one upper case, one lowercase, and six character"
-    //   );
-    //   return;
-    // }
+    if (!passwordRegex.test(password)) {
+      setError(
+        "Password must be at lest one upper case, one lowercase, and six character"
+      );
+      return;
+    }
 
     signUpWithEmail(email, password)
       .then((res) => {
@@ -82,6 +83,9 @@ const SignUp = () => {
 
   return (
     <div className="flex flex-col md:flex-row  bg-primary-lightest my-10 gap-5 ">
+      <Helmet>
+        <title>Sign up || WhereIsIt</title>
+      </Helmet>
       {/* Left Section - Illustration */}
       <div className="flex-1 flex items-center justify-center md:justify-end ">
         <div className="relative w-2/3">

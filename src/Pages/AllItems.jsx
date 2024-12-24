@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UseAxiosSecure from "../hooks/UseAxiosSecure";
 import LoadingPage from "./Loading";
+import { Helmet } from "react-helmet";
 
 const AllItems = () => {
   const [items, setItems] = useState([]);
@@ -27,6 +28,9 @@ const AllItems = () => {
 
   return (
     <div className="bg-primary-lightest  py-10 px-6">
+      <Helmet>
+        <title>All Post || WhereIsIt</title>
+      </Helmet>
       <h1 className="text-3xl font-bold text-primary-dark text-center mb-6">
         Lost & Found Items
       </h1>

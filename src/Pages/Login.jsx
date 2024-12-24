@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthContext";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -53,6 +54,9 @@ const Login = () => {
 
   return (
     <div className="flex flex-col md:flex-row h-screen bg-primary-lightest mt-4 md:mt-0">
+      <Helmet>
+        <title>Login || WhereIsIt</title>
+      </Helmet>
       {/* Left Section - Illustration */}
       <div className="flex-1 flex items-center md:justify-end justify-center px-6 ">
         <div className="max-w-md w-full bg-white rounded-lg shadow-2xl p-6 border-2 border-primary-dark">

@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthContext";
 import UseAxiosSecure from "../hooks/UseAxiosSecure";
+import { Helmet } from "react-helmet";
 
 const AllRecoveredItems = () => {
   const { user } = useContext(AuthContext);
@@ -28,6 +29,9 @@ const AllRecoveredItems = () => {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8">
+      <Helmet>
+        <title>All Recovered || WhereIsIt</title>
+      </Helmet>
       <h2 className="text-3xl font-bold text-primary-darkest text-center mb-6">
         All Recovered Items
       </h2>

@@ -125,7 +125,7 @@ const Navbar = () => {
                     <img
                       src={user.photoURL} // Replace with user.photoURL
                       alt="User Profile"
-                      className="w-10 h-10 rounded-full border-2 border-primary"
+                      className="w-10 h-10 rounded-full border-2 border-primary object-contain p-[2px]"
                       referrerPolicy="no-referrer"
                     />
                   </button>

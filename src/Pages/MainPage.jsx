@@ -3,10 +3,14 @@ import LatestItems from "../Components/LatestItems";
 import HighlightedStories from "../Components/HighlightedStories";
 import CommunityStats from "../Components/CommunityStats";
 import HowItWorks from "../Components/HowItWorks";
+import { Helmet } from "react-helmet";
 
 const MainPage = () => {
   return (
     <div>
+      <Helmet>
+        <title>WhereIsIt</title>
+      </Helmet>
       <Carusal></Carusal>
       <LatestItems></LatestItems>
       <HowItWorks></HowItWorks>
