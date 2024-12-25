@@ -1,34 +1,48 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import StoryCard from "./StoryCard";
+import { useEffect, useState } from "react";
+import UseAxiosSecure from "./../hooks/UseAxiosSecure";
 
 const HighlightedStories = () => {
-  const stories = [
-    {
-      id: 1,
-      userName: "John Doe",
-      userImage: "https://via.placeholder.com/100",
-      story:
-        "I lost my wallet at the park, but thanks to this platform, I got it back within hours!",
-      date: "December 18, 2024",
-    },
-    {
-      id: 2,
-      userName: "Emily Johnson",
-      userImage: "https://via.placeholder.com/100",
-      story:
-        "My dog went missing last week. A kind person found him and contacted me here. So grateful!",
-      date: "December 20, 2024",
-    },
-    {
-      id: 3,
-      userName: "David Smith",
-      userImage: "https://via.placeholder.com/100",
-      story:
-        "Lost my car keys in a mall. Posted here and someone found them the same day. Amazing platform!",
-      date: "December 22, 2024",
-    },
-  ];
+  const AxiosSecure = UseAxiosSecure();
+  const [stories, setStories] = useState([]);
+  console.log(stories);
+
+  // const stories = [
+  //   {
+  //     id: 1,
+  //     userName: "John Doe",
+  //     userImage: "https://via.placeholder.com/100",
+  //     story:
+  //       "I lost my wallet at the park, but thanks to this platform, I got it back within hours!",
+  //     date: "December 18, 2024",
+  //   },
+  //   {
+  //     id: 2,
+  //     userName: "Emily Johnson",
+  //     userImage: "https://via.placeholder.com/100",
+  //     story:
+  //       "My dog went missing last week. A kind person found him and contacted me here. So grateful!",
+  //     date: "December 20, 2024",
+  //   },
+  //   {
+  //     id: 3,
+  //     userName: "David Smith",
+  //     userImage: "https://via.placeholder.com/100",
+  //     story:
+  //       "Lost my car keys in a mall. Posted here and someone found them the same day. Amazing platform!",
+  //     date: "December 22, 2024",
+  //   },
+  // ];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await AxiosSecure.get("/reviews");
+      setStories(data);
+    };
+    fetchData();
+  }, [AxiosSecure]);
 
   const responsive = {
     desktop: {
@@ -85,7 +99,7 @@ const HighlightedStories = () => {
           swipeable
         >
           {stories.map((story) => (
-            <StoryCard key={story.id} story={story} />
+            <StoryCard key={story._id} story={story} />
           ))}
         </Carousel>
       </div>
