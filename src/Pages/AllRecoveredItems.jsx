@@ -3,31 +3,38 @@ import { AuthContext } from "../Provider/AuthContext";
 import UseAxiosSecure from "../hooks/UseAxiosSecure";
 import { Helmet } from "react-helmet";
 import { FaTh, FaTable } from "react-icons/fa";
+import LoadingPage from "./Loading";
 
 const AllRecoveredItems = () => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
   const [recoveredItems, setRecoveredItems] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [isloading, setIsLoading] = useState(true);
   const [isTableLayout, setIsTableLayout] = useState(false); // Track layout
   const AxiosSecure = UseAxiosSecure();
 
   // Fetch recovered items for the logged-in user
   useEffect(() => {
-    const fetchRecoveredItems = async () => {
-      try {
-        const { data } = await AxiosSecure.get(
-          `/recovered-items?email=${user?.email}`
-        );
-        setRecoveredItems(data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching recovered items:", error);
-        setLoading(false);
-      }
-    };
+    if (user && user.email) {
+      const fetchRecoveredItems = async () => {
+        try {
+          const { data } = await AxiosSecure.get(
+            `/recovered-items?email=${user?.email}`
+          );
+          setRecoveredItems(data);
+          setIsLoading(false);
+        } catch (error) {
+          console.error("Error fetching recovered items:", error);
+          setIsLoading(false);
+        }
+      };
 
-    fetchRecoveredItems();
-  }, [AxiosSecure, user?.email]);
+      fetchRecoveredItems();
+    }
+  }, [AxiosSecure, user, user?.email]);
+
+  if (loading) {
+    return <LoadingPage></LoadingPage>;
+  }
 
   return (
     <section className="bg-gradient-to-b from-primary-light to-background-light">
@@ -57,7 +64,7 @@ const AllRecoveredItems = () => {
           </button>
         </div>
 
-        {loading ? (
+        {isloading ? (
           <p className="text-center text-primary-dark">Loading...</p>
         ) : recoveredItems.length === 0 ? (
           <div className="text-center bg-primary-light text-primary-dark py-10 rounded-lg shadow-md">

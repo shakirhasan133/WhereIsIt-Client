@@ -56,7 +56,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-screen bg-gradient-to-b from-primary-light to-background-light mt-4 md:mt-0">
+    <div className="flex flex-col md:gap-0 gap-5 py-5 md:py-0 md:flex-row h-screen bg-gradient-to-b from-primary-light to-background-light md:mt-0">
       <Helmet>
         <title>Login || WhereIsIt</title>
       </Helmet>
