@@ -82,7 +82,7 @@ const PostDetails = () => {
         <img
           src={item.image}
           alt={item.title}
-          className="w-full h-[300px] object-cover rounded-md"
+          className="w-full h-[300px] object-center rounded-md"
         />
         <h1 className="text-xl md:text-3xl font-bold text-primary-dark my-4">
           {item.title}

@@ -7,6 +7,7 @@ import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthContext";
 import Swal from "sweetalert2";
 import logo from "../assets/WhereIsItLogo.png";
+import { motion } from "framer-motion";
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
@@ -62,14 +63,25 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-2">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3">
-            <div className=" rounded-full">
-              <img src={logo} alt="" className="w-9 h-9 rounded-full" />
-            </div>
-            <span className="text-xl font-bold text-primary-light">
-              WhereIsIt
-            </span>
-          </Link>
+          <motion.div
+            initial={{ x: -200 }}
+            animate={{ x: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            <Link to="/" className="flex items-center space-x-3">
+              <motion.div
+                className=" rounded-full"
+                initial={{ y: -200 }}
+                animate={{ y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                <img src={logo} alt="" className="w-9 h-9 rounded-full" />
+              </motion.div>
+              <span className="text-xl font-bold text-primary-light">
+                WhereIsIt
+              </span>
+            </Link>
+          </motion.div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-6">
@@ -153,11 +165,11 @@ const Navbar = () => {
                   </button>
                 </div>
                 {isDropdownOpen && (
-                  <div className="absolute w-[250px] right-0 mt-2 bg-primary-light text-primary-dark rounded-md shadow-lg z-10">
+                  <div className="absolute w-[250px] right-0 mt-2 bg-primary-light text-primary-dark rounded-md shadow-lg z-50">
                     <NavLink
                       to="/addItems"
                       className={({ isActive }) =>
-                        `block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition${
+                        `block px-4 py-2 w-full text-left hover:bg-primary-dark hover:text-primary-light transition ${
                           isActive
                             ? "bg-primary-dark text-primary-light transition"
                             : ""
