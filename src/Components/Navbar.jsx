@@ -155,6 +155,7 @@ const Navbar = () => {
                       alt="User Profile"
                       className="w-10 h-10 rounded-full border-2 border-primary object-contain p-[2px] hover:scale-110 transition-all"
                       referrerPolicy="no-referrer"
+                      title={user?.displayName}
                     />
                   </button>
                   <button
