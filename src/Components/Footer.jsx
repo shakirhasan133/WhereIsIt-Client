@@ -3,17 +3,16 @@ import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-primary-darkest text-primary-light py-10">
+    <footer className="bg-primary-darkest dark:bg-black text-primary-light dark:text-primary-lightest py-10 transition">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {/* About Section */}
           <div>
             <h3 className="text-lg font-semibold mb-4">About WhereIsIt</h3>
-            <p className="text-sm text-primary-lightest">
-              WhereIsIt is a platform to connect people who have lost or found
-              items. We help in reuniting people with their belongings
-              efficiently and securely.
+            <p className="text-sm text-primary-lightest opacity-90">
+              WhereIsIt connects people who have lost or found items, helping
+              them reunite with their belongings efficiently and securely.
             </p>
           </div>
 
@@ -24,7 +23,7 @@ const Footer = () => {
               <li>
                 <Link
                   to="/"
-                  className="text-sm hover:text-primary transition duration-200"
+                  className="text-sm hover:text-primary-light dark:hover:text-primary transition duration-200"
                 >
                   Home
                 </Link>
@@ -32,27 +31,11 @@ const Footer = () => {
               <li>
                 <Link
                   to="/allitems"
-                  className="text-sm hover:text-primary transition duration-200"
+                  className="text-sm hover:text-primary-light dark:hover:text-primary transition duration-200"
                 >
                   Lost & Found Items
                 </Link>
               </li>
-              {/* <li>
-                <Link
-                  to="/contact"
-                  className="text-sm hover:text-primary transition duration-200"
-                >
-                  Contact Us
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/faq"
-                  className="text-sm hover:text-primary transition duration-200"
-                >
-                  FAQ
-                </Link>
-              </li> */}
             </ul>
           </div>
 
@@ -64,7 +47,7 @@ const Footer = () => {
                 <span className="font-medium">Email:</span>{" "}
                 <a
                   href="mailto:support@whereisit.com"
-                  className="hover:text-primary transition duration-200"
+                  className="hover:text-primary-light dark:hover:text-primary transition duration-200"
                 >
                   support@whereisit.com
                 </a>
@@ -73,7 +56,7 @@ const Footer = () => {
                 <span className="font-medium">Phone:</span>{" "}
                 <a
                   href="tel:+123456789"
-                  className="hover:text-primary transition duration-200"
+                  className="hover:text-primary-light dark:hover:text-primary transition duration-200"
                 >
                   +123 456 789
                 </a>
@@ -94,7 +77,7 @@ const Footer = () => {
                   href="https://facebook.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-primary transition duration-200"
+                  className="hover:text-primary-light dark:hover:text-primary transition duration-200"
                 >
                   <FaFacebook size={24} />
                 </a>
@@ -104,7 +87,7 @@ const Footer = () => {
                   href="https://twitter.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-primary transition duration-200"
+                  className="hover:text-primary-light dark:hover:text-primary transition duration-200"
                 >
                   <FaTwitter size={24} />
                 </a>
@@ -114,7 +97,7 @@ const Footer = () => {
                   href="https://instagram.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-primary transition duration-200"
+                  className="hover:text-primary-light dark:hover:text-primary transition duration-200"
                 >
                   <FaInstagram size={24} />
                 </a>
@@ -124,7 +107,7 @@ const Footer = () => {
                   href="https://linkedin.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-primary transition duration-200"
+                  className="hover:text-primary-light dark:hover:text-primary transition duration-200"
                 >
                   <FaLinkedin size={24} />
                 </a>
@@ -134,8 +117,8 @@ const Footer = () => {
         </div>
 
         {/* Bottom Section */}
-        <div className="mt-8 border-t border-primary-light pt-4 text-center">
-          <p className="text-sm text-primary-lightest">
+        <div className="mt-8 border-t border-primary-light dark:border-primary-lightest pt-4 text-center">
+          <p className="text-sm text-primary-lightest opacity-90">
             &copy; {new Date().getFullYear()} WhereIsIt. All Rights Reserved.
           </p>
         </div>

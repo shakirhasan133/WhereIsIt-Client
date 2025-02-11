@@ -35,12 +35,12 @@ const HighlightedStories = () => {
   };
 
   return (
-    <section className="bg-gradient-to-b to-primary-light from-background-light py-12 px-6">
+    <section className="bg-gradient-to-b to-primary-light from-background-light dark:to-background-dark dark:from-primary-darkest py-12 px-6 transition">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-primary-dark text-center mb-6">
+        <h2 className="text-3xl md:text-4xl font-bold text-primary-dark dark:text-primary-light text-center mb-6">
           Highlighted Stories
         </h2>
-        <p className="text-lg text-primary-medium text-center mb-10">
+        <p className="text-lg text-primary-medium dark:text-primary-light opacity-90 text-center mb-10">
           Heartwarming success stories from our amazing community.
         </p>
         <Carousel
@@ -53,7 +53,7 @@ const HighlightedStories = () => {
           draggable
           focusOnSelect
           infinite
-          itemClass=""
+          itemClass=" rounded-lg shadow-lg"
           keyBoardControl
           minimumTouchDrag={80}
           pauseOnHover
