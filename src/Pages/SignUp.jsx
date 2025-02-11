@@ -41,21 +41,35 @@ const SignUp = () => {
         .then((res) => {
           updateUserData(name, photo).then(() => {
             setUser(res.user);
+            let timerInterval;
             Swal.fire({
-              position: "center",
-              icon: "success",
-              title: "Sign up Successful",
-              showConfirmButton: false,
-              timer: 1500,
+              title: "Login Successful",
+              html: "Please wait <b></b> seconds to redirect.",
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: () => {
+                Swal.showLoading();
+                const timer = Swal.getPopup().querySelector("b");
+                timerInterval = setInterval(() => {
+                  timer.textContent = `${(Swal.getTimerLeft() / 1000).toFixed(
+                    1
+                  )}`;
+                }, 100);
+              },
+              willClose: () => {
+                clearInterval(timerInterval);
+              },
+            }).then((result) => {
+              /* Read more about handling dismissals below */
+              if (result.dismiss === Swal.DismissReason.timer) {
+                navigate(from);
+              }
             });
-
-            navigate(from);
           });
         })
         .catch((error) => {
-          if (error.message == "Firebase: Error (auth/invalid-email).") {
-            setIsError("This email already used");
-          }
+          setIsError("This email already used");
+          console.log(error);
         });
     } catch {
       setIsError("Something Went Wrong");
@@ -68,12 +82,27 @@ const SignUp = () => {
       .then((res) => {
         setUser(res.user);
 
+        let timerInterval;
         Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Log in Successful",
-          showConfirmButton: false,
-          timer: 1500,
+          title: "Login Successful",
+          html: "Please wait <b></b> seconds to redirect.",
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+            const timer = Swal.getPopup().querySelector("b");
+            timerInterval = setInterval(() => {
+              timer.textContent = `${(Swal.getTimerLeft() / 1000).toFixed(1)}`;
+            }, 100);
+          },
+          willClose: () => {
+            clearInterval(timerInterval);
+          },
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            navigate(from);
+          }
         });
       })
       .catch((error) => {

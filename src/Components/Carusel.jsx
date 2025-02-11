@@ -8,7 +8,7 @@ export function Carusal() {
       {/* Slide 1 */}
       <div className="relative h-[90vh] w-full">
         <img
-          src="https://ideogram.ai/assets/image/lossless/response/L7WyxCyHTXmgZ6My9COwug"
+          src="https://i.ibb.co.com/5Lc24MZ/lost-any-item.webp"
           alt="Empower Dreams"
           className="h-[90vh] w-full object-cover"
         />
@@ -48,7 +48,7 @@ export function Carusal() {
       {/* Slide 2 */}
       <div className="relative h-[90vh] w-full">
         <img
-          src="https://ideogram.ai/assets/image/lossless/response/vf5-c5iSTkmaYLeKIyCHKw"
+          src="https://i.ibb.co.com/6ZNZ34V/be-a-part-of-solutions.webp"
           alt="Create Campaign"
           className="h-[90vh] w-full object-cover"
         />
@@ -86,7 +86,7 @@ export function Carusal() {
       {/* Slide 3 */}
       <div className="relative h-[90vh] w-full">
         <img
-          src="https://ideogram.ai/assets/progressive-image/balanced/response/3JwU8XeBRk-BhK-4OSJNag"
+          src="https://i.ibb.co.com/m5qQCKH/addcontribute.jpg"
           alt="Recently Recovered Items"
           className="h-[90vh] w-full object-cover"
         />

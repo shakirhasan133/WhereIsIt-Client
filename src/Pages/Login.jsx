@@ -23,7 +23,28 @@ const Login = () => {
     signInWithGoogleEmail()
       .then((res) => {
         setUser(res.user);
-        navigate(from);
+        let timerInterval;
+        Swal.fire({
+          title: "Login Successful",
+          html: "Please wait <b></b> seconds to redirect.",
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+            const timer = Swal.getPopup().querySelector("b");
+            timerInterval = setInterval(() => {
+              timer.textContent = `${(Swal.getTimerLeft() / 1000).toFixed(1)}`;
+            }, 100);
+          },
+          willClose: () => {
+            clearInterval(timerInterval);
+          },
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            navigate(from);
+          }
+        });
       })
       .catch((error) => {
         setIsError(error.message);
@@ -38,17 +59,30 @@ const Login = () => {
     const password = e.target.password.value;
 
     signInWithEmail(email, password)
-      .then((res) => {
-        setUser(res.user);
-
+      .then(async (res) => {
+        await setUser(res.user);
+        let timerInterval;
         Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Sign in Successful",
-          showConfirmButton: false,
-          timer: 1500,
+          title: "Login Successful",
+          html: "Please wait <b></b> seconds to redirect.",
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading();
+            const timer = Swal.getPopup().querySelector("b");
+            timerInterval = setInterval(() => {
+              timer.textContent = `${(Swal.getTimerLeft() / 1000).toFixed(1)}`;
+            }, 100);
+          },
+          willClose: () => {
+            clearInterval(timerInterval);
+          },
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            navigate(from);
+          }
         });
-        navigate(from);
       })
       .catch(() => {
         setIsError("Something Went Wrong");

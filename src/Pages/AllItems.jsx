@@ -40,6 +40,7 @@ const AllItems = () => {
     setFilteredItems(filtered);
   };
 
+  
   return (
     <div className="bg-gradient-to-b from-primary-light to-background-light py-10 px-6">
       <Helmet>

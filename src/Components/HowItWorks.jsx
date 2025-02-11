@@ -14,7 +14,7 @@ const HowItWorks = () => {
 
         <div className="w-full md:w-1/2 flex justify-center">
           <img
-            src="https://i.ibb.co.com/LC4V48z/how-it-works.jpg"
+            src="https://i.ibb.co.com/0VcXN0H/how-it-works.jpg"
             alt="How it works visual"
             className="rounded-lg  object-cover w-full md:max-w-[400px]"
           />

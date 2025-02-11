@@ -1,19 +1,35 @@
 import { useState, useEffect, useContext } from "react";
 import { FaSearchLocation } from "react-icons/fa";
-import { IoMdCloseCircle } from "react-icons/io";
-import { IoHome } from "react-icons/io5";
+import { IoMdCloseCircle, IoMdSunny } from "react-icons/io";
+import { IoHome, IoMoonOutline } from "react-icons/io5";
 import { RiMenu3Fill } from "react-icons/ri";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthContext";
 import Swal from "sweetalert2";
 import logo from "../assets/WhereIsItLogo.png";
 import { motion } from "framer-motion";
+import UseAxiosSecure from "../hooks/UseAxiosSecure";
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const AxiosSecure = UseAxiosSecure();
+
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("theme") === "dark"
+  );
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
 
   // Handle scroll event to toggle navbar transparency
   useEffect(() => {
@@ -33,21 +49,27 @@ const Navbar = () => {
   const handleSignOut = () => {
     signOutUser()
       .then(() => {
-        const Toast = Swal.mixin({
-          toast: true,
-          position: "bottom-right",
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: true,
-          didOpen: (toast) => {
-            toast.onmouseenter = Swal.stopTimer;
-            toast.onmouseleave = Swal.resumeTimer;
-          },
-        });
-        Toast.fire({
-          icon: "success",
-          title: "Logout Successful",
-        });
+        AxiosSecure.get("/logout")
+          .then(() => {
+            const Toast = Swal.mixin({
+              toast: true,
+              position: "bottom-right",
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
+              },
+            });
+            Toast.fire({
+              icon: "success",
+              title: "Logout Successful",
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         console.log(error);
@@ -115,10 +137,33 @@ const Navbar = () => {
                 <span>Lost and found item</span>
               </div>
             </NavLink>
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                `hover:text-primary transition duration-200 ${
+                  isActive
+                    ? "border-b-2 text-white transition-all scale-105"
+                    : ""
+                }`
+              }
+            >
+              <div className="flex items-center justify-center gap-1">
+                <FaSearchLocation className="inline"></FaSearchLocation>
+                <span>About</span>
+              </div>
+            </NavLink>
           </div>
 
           {/* Right Side Buttons */}
           <div className="flex items-center space-x-4">
+            <div>
+              <button
+                className="bg-primary-dark p-2 rounded-full"
+                onClick={() => setDarkMode(!darkMode)}
+              >
+                {darkMode ? <IoMdSunny /> : <IoMoonOutline />}
+              </button>
+            </div>
             {!user ? (
               <div className="md:flex items-center justify-center gap-2 hidden ">
                 <Link

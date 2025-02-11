@@ -19,19 +19,20 @@ const UseAxiosSecure = () => {
       (result) => {
         return result;
       },
-      (error) => {
+      async (error) => {
         console.log(error.message);
-
         if (error.status === 401 || error.status === 403) {
-          Swal.fire({
-            position: "center",
-            icon: "error",
-            title: "Something Went Wrong",
-            showConfirmButton: false,
-            timer: 1000,
-          });
           signOutUser();
-          navigate("/login");
+          await AxiosSecure.get("/logout").then(() => {
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: "Something Went Wrong",
+              showConfirmButton: false,
+              timer: 1000,
+            });
+            navigate("/login");
+          });
         }
       }
     );

@@ -31,13 +31,13 @@ const Footer = () => {
               </li>
               <li>
                 <Link
-                  to="/lost-found-items"
+                  to="/allitems"
                   className="text-sm hover:text-primary transition duration-200"
                 >
                   Lost & Found Items
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <Link
                   to="/contact"
                   className="text-sm hover:text-primary transition duration-200"
@@ -52,7 +52,7 @@ const Footer = () => {
                 >
                   FAQ
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
 

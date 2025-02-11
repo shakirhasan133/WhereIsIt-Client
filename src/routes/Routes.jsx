@@ -13,6 +13,7 @@ import UpdateItem from "../Pages/UpdateItem";
 import ErrorPage from "../Pages/ErrorPage";
 import ForgetPassword from "../Pages/ForgetPassword";
 import ShortReview from "../Pages/ShortReview";
+import About from "../Pages/About";
 
 export const router = createBrowserRouter([
   {
@@ -87,6 +88,10 @@ export const router = createBrowserRouter([
       {
         path: "/resetPassword",
         element: <ForgetPassword></ForgetPassword>,
+      },
+      {
+        path: "/about",
+        element: <About></About>,
       },
     ],
   },

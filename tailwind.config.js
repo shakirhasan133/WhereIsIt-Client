@@ -5,9 +5,12 @@ module.exports = withMT({
   content: [
     "./src/**/*.{js,jsx,ts,tsx}", // Adjust paths to match your project structure
   ],
+  darkMode: "class", // Enable dark mode using class-based toggling
   theme: {
     extend: {
-      fontFamily: { primary: ['"Merriweather Sans"', "sans-serif"] },
+      fontFamily: {
+        primary: ['"Merriweather Sans"', "sans-serif"], // Custom font
+      },
       colors: {
         primary: {
           light: "#B8E3EA", // Soft Aqua
@@ -21,20 +24,20 @@ module.exports = withMT({
           dark: "#D15037", // Burnt Orange
         },
         background: {
-          light: "#F7FAFC", // Subtle Off-White
-          dark: "#1E293B", // Neutral Navy
+          light: "#F7FAFC", // Subtle Off-White (light mode)
+          dark: "#1E293B", // Neutral Navy (dark mode)
         },
         text: {
-          light: "#606F7B", // Soft Slate
-          dark: "#1B1F23", // Rich Black
+          light: "#606F7B", // Soft Slate (light mode)
+          dark: "#1B1F23", // Rich Black (dark mode)
         },
         accent: {
-          light: "#FDE8E9", // Blush Pink
-          DEFAULT: "#E63946", // Bright Red
-          dark: "#940C24", // Dark Crimson
+          light: "#FDE8E9", // Blush Pink (light mode)
+          DEFAULT: "#E63946", // Bright Red (default)
+          dark: "#940C24", // Dark Crimson (dark mode)
         },
       },
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui")], // DaisyUI plugin for additional UI components
 });
