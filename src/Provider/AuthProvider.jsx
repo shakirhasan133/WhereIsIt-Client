@@ -19,6 +19,19 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [error, setError] = useState("");
   // const AxiosSecure = UseAxiosSecure();
+  const [darkMode, setDarkMode] = useState(
+    localStorage.getItem("theme") === "dark"
+  );
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [darkMode]);
 
   // Sign in with Google
   const signInWithGoogleEmail = () => {
@@ -98,6 +111,8 @@ const AuthProvider = ({ children }) => {
     setError,
     updateUserData,
     resetPassword,
+    darkMode,
+    setDarkMode,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

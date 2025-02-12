@@ -91,7 +91,7 @@ const AddLostFoundItem = () => {
   }
 
   return (
-    <section className="bg-gradient-to-b from-primary-light to-background-light">
+    <section className="bg-gradient-to-b from-primary-light to-background-light dark:from-background-dark dark:to-primary-darkest">
       <div className="max-w-5xl mx-auto px-6 py-8 bg-gradient-to-b from-primary-light to-background-light rounded-lg ">
         <Helmet>
           <title>Add Post || WhereIsIt</title>
@@ -101,12 +101,12 @@ const AddLostFoundItem = () => {
         </h2>
         <form
           onSubmit={handlePostSubmit}
-          className="space-y-6 bg-white p-8 rounded-lg shadow-lg"
+          className="space-y-6 bg-white dark:bg-background-dark  p-8 rounded-lg shadow-lg"
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Post Type */}
             <div>
-              <label className="block text-lg font-medium text-primary-dark mb-2">
+              <label className="block text-lg font-medium text-primary-dark dark:text-primary-light mb-2">
                 Post Type
               </label>
               <select
@@ -124,7 +124,7 @@ const AddLostFoundItem = () => {
 
             {/* Thumbnail */}
             <div>
-              <label className="block text-lg font-medium text-primary-dark mb-2">
+              <label className="block text-lg font-medium text-primary-dark dark:text-primary-light mb-2">
                 Thumbnail (Image Upload)
               </label>
               <input
@@ -138,7 +138,7 @@ const AddLostFoundItem = () => {
 
             {/* Title */}
             <div>
-              <label className="block text-lg font-medium text-primary-dark mb-2">
+              <label className="block text-lg font-medium text-primary-dark dark:text-primary-light mb-2">
                 Title
               </label>
               <input
@@ -152,7 +152,7 @@ const AddLostFoundItem = () => {
 
             {/* Description */}
             <div className="sm:col-span-2 lg:col-span-3">
-              <label className="block text-lg font-medium text-primary-dark mb-2">
+              <label className="block text-lg font-medium text-primary-dark dark:text-primary-light mb-2">
                 Description
               </label>
               <textarea
@@ -166,7 +166,7 @@ const AddLostFoundItem = () => {
 
             {/* Category */}
             <div>
-              <label className="block text-lg font-medium text-primary-dark mb-2">
+              <label className="block text-lg font-medium text-primary-dark dark:text-primary-light mb-2">
                 Category
               </label>
               <select
@@ -186,7 +186,7 @@ const AddLostFoundItem = () => {
 
             {/* Location */}
             <div>
-              <label className="block text-lg font-medium text-primary-dark mb-2">
+              <label className="block text-lg font-medium text-primary-dark dark:text-primary-light mb-2">
                 Location
               </label>
               <input
@@ -200,7 +200,7 @@ const AddLostFoundItem = () => {
 
             {/* Date */}
             <div>
-              <label className="block text-lg font-medium text-primary-dark mb-2">
+              <label className="block text-lg font-medium text-primary-dark dark:text-primary-light mb-2">
                 Date Lost or Found
               </label>
               <DatePicker
@@ -213,7 +213,7 @@ const AddLostFoundItem = () => {
 
             {/* Contact Information */}
             <div className="sm:col-span-2 lg:col-span-3">
-              <label className="block text-lg font-medium text-primary-dark mb-2">
+              <label className="block text-lg font-medium text-primary-dark dark:text-primary-light mb-2">
                 Contact Information
               </label>
               <div className="flex items-center justify-between gap-3 flex-col md:flex-row">

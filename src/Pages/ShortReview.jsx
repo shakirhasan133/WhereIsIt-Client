@@ -47,7 +47,7 @@ const ShortReview = () => {
   };
 
   return (
-    <div className="bg-gradient-to-b from-primary-light to-background-lights py-10">
+    <div className="bg-gradient-to-b from-primary-light to-background-light dark:from-background-dark dark:to-primary-darkest py-10">
       <div className="bg-white shadow-lg rounded-lg max-w-xl mx-auto p-6 ">
         <Toaster />
         <h2 className="text-2xl font-bold text-primary-darkest mb-4 text-center">

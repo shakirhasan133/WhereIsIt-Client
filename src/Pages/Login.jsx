@@ -1,7 +1,14 @@
 import Lottie from "lottie-react";
-import { FaGoogle, FaEnvelope, FaEye, FaEyeSlash } from "react-icons/fa";
+import {
+  FaGoogle,
+  FaEnvelope,
+  FaEye,
+  FaEyeSlash,
+  FaMoon,
+  FaSun,
+} from "react-icons/fa";
 import loginAnimation from "../assets/login.json";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthContext";
 import Swal from "sweetalert2";
@@ -12,46 +19,41 @@ const Login = () => {
   const { signInWithGoogleEmail, signInWithEmail, setUser } =
     useContext(AuthContext);
   const [showPass, setShowPass] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const location = useLocation();
   const from = location?.state || "/";
   const [isError, setIsError] = useState("");
   const [userEmail, setUserEmail] = useState("");
 
-  // Log in with Google
+  useEffect(() => {
+    const darkModePref = localStorage.getItem("darkMode");
+    if (darkModePref === "true") {
+      setIsDarkMode(true);
+      document.documentElement.classList.add("dark");
+    }
+  }, []);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+    localStorage.setItem("darkMode", !isDarkMode);
+    document.documentElement.classList.toggle("dark");
+  };
 
   const handleLoginWithGoogleEmail = () => {
     signInWithGoogleEmail()
       .then((res) => {
         setUser(res.user);
-        let timerInterval;
         Swal.fire({
           title: "Login Successful",
-          html: "Please wait <b></b> seconds to redirect.",
+          html: "Redirecting...",
           timer: 3000,
           timerProgressBar: true,
-          didOpen: () => {
-            Swal.showLoading();
-            const timer = Swal.getPopup().querySelector("b");
-            timerInterval = setInterval(() => {
-              timer.textContent = `${(Swal.getTimerLeft() / 1000).toFixed(1)}`;
-            }, 100);
-          },
-          willClose: () => {
-            clearInterval(timerInterval);
-          },
-        }).then((result) => {
-          /* Read more about handling dismissals below */
-          if (result.dismiss === Swal.DismissReason.timer) {
-            navigate(from);
-          }
-        });
+          didOpen: () => Swal.showLoading(),
+        }).then(() => navigate(from));
       })
-      .catch((error) => {
-        setIsError(error.message);
-      });
+      .catch((error) => setIsError(error.message));
   };
 
-  // Log in with Email and password
   const handleLoginWithEmailandPass = (e) => {
     e.preventDefault();
     setIsError("");
@@ -61,95 +63,79 @@ const Login = () => {
     signInWithEmail(email, password)
       .then(async (res) => {
         await setUser(res.user);
-        let timerInterval;
         Swal.fire({
           title: "Login Successful",
-          html: "Please wait <b></b> seconds to redirect.",
+          html: "Redirecting...",
           timer: 3000,
           timerProgressBar: true,
-          didOpen: () => {
-            Swal.showLoading();
-            const timer = Swal.getPopup().querySelector("b");
-            timerInterval = setInterval(() => {
-              timer.textContent = `${(Swal.getTimerLeft() / 1000).toFixed(1)}`;
-            }, 100);
-          },
-          willClose: () => {
-            clearInterval(timerInterval);
-          },
-        }).then((result) => {
-          /* Read more about handling dismissals below */
-          if (result.dismiss === Swal.DismissReason.timer) {
-            navigate(from);
-          }
-        });
+          didOpen: () => Swal.showLoading(),
+        }).then(() => navigate(from));
       })
-      .catch(() => {
-        setIsError("Something Went Wrong");
-      });
+      .catch(() => setIsError("Something Went Wrong"));
   };
 
   return (
-    <div className="flex flex-col md:gap-0 gap-5 py-5 md:py-0 md:flex-row h-screen bg-gradient-to-b from-primary-light to-background-light md:mt-0">
+    <div className="flex flex-col md:flex-row h-screen bg-gradient-to-b from-primary-light to-background-light dark:from-background-dark dark:to-primary-darkest transition-colors">
       <Helmet>
         <title>Login || WhereIsIt</title>
       </Helmet>
-      {/* Left Section - Illustration */}
-      <div className="flex-1 flex items-center md:justify-end justify-center px-6 ">
-        <div className="max-w-md w-full bg-white rounded-lg shadow-2xl p-6 border-2 border-primary-dark">
-          <h2 className="text-2xl font-bold text-primary-dark text-center">
-            Welcome Back
-          </h2>
-          <h2 className="text-md text-center text-primary-dark my-1">
-            Enter your details for login
+
+      <button
+        onClick={toggleDarkMode}
+        className="absolute top-4 right-4 p-2 text-xl"
+      >
+        {isDarkMode ? (
+          <FaSun className="text-yellow-400" />
+        ) : (
+          <FaMoon className="text-gray-600" />
+        )}
+      </button>
+
+      <div className="flex-1 flex items-center justify-center md:justify-end px-6 ">
+        <div className="max-w-md w-full  bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg shadow-2xl p-6 border border-gray-300 dark:border-gray-700">
+          <h2 className="text-2xl font-bold text-center">Welcome Back</h2>
+          <h2 className="text-md text-center my-1">
+            Enter your details to log in
           </h2>
 
           <form onSubmit={handleLoginWithEmailandPass}>
-            {/* Email Field */}
-            <div className="mb-2">
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-gray-600 mb-2"
-              >
+            <div className="mb-4">
+              <label htmlFor="email" className="block text-sm font-medium mb-2">
                 Email
               </label>
-              <div className="flex items-center border-2 rounded-lg px-3">
+              <div className="flex items-center border rounded-lg px-3 dark:border-gray-600">
                 <FaEnvelope className="text-primary-dark" />
                 <input
                   type="email"
                   name="email"
                   onChange={(e) => setUserEmail(e.target.value)}
                   placeholder="you@example.com"
-                  className="w-full p-2 focus:outline-none"
+                  className="w-full p-2 bg-transparent focus:outline-none"
                 />
               </div>
             </div>
 
-            {/* Password Field */}
-            <div className="mb-2">
+            <div className="mb-4">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-600 mb-2"
+                className="block text-sm font-medium mb-2"
               >
                 Password
               </label>
-              <div className="flex items-center border-2 rounded-lg px-3 ">
+              <div className="flex items-center border rounded-lg px-3 dark:border-gray-600">
                 <button
                   onClick={(e) => {
-                    e.preventDefault(), setShowPass(!showPass);
+                    e.preventDefault();
+                    setShowPass(!showPass);
                   }}
                 >
-                  {showPass ? (
-                    <FaEye className="text-primary-dark"></FaEye>
-                  ) : (
-                    <FaEyeSlash className="text-primary-dark" />
-                  )}
+                  {showPass ? <FaEye /> : <FaEyeSlash />}
                 </button>
                 <input
                   type={showPass ? "text" : "password"}
                   name="password"
                   placeholder="••••••••"
-                  className="w-full p-2 focus:outline-none"
+                  className="w-full p-2 bg-transparent focus:outline-none"
                 />
               </div>
               <div className="text-right mt-2">
@@ -163,7 +149,6 @@ const Login = () => {
               </div>
             </div>
 
-            {/* Submit Button */}
             <button
               type="submit"
               className="w-full bg-primary-dark text-white font-bold py-2 px-4 rounded-lg hover:bg-primary-darkest transition"
@@ -172,31 +157,23 @@ const Login = () => {
             </button>
           </form>
           {isError && <p className="text-red-500 py-2">{isError}</p>}
-          {/* Divider */}
+
           <div className="flex items-center my-4">
-            <hr className="flex-grow border-t border-gray-300" />
-            <span className="mx-4 text-sm text-gray-500">Or Continue With</span>
-            <hr className="flex-grow border-t border-gray-300" />
+            <hr className="flex-grow border-gray-300" />
+            <span className="mx-4 text-sm">Or Continue With</span>
+            <hr className="flex-grow border-gray-300" />
           </div>
 
-          {/* Social Media Login */}
-          <div className="flex justify-center gap-4">
+          <div className="flex justify-center items-center gap-4 ">
             <button
-              className="flex items-center justify-center w-12 h-12 bg-gray-200 rounded-full hover:bg-gray-300 transition"
+              className="w-12 h-12 flex items-center justify-center bg-gray-200 dark:bg-gray-700 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transition"
               onClick={handleLoginWithGoogleEmail}
             >
-              <FaGoogle className="text-xl text-gray-600" />
+              <FaGoogle className="text-xl text-gray-600 dark:text-white" />
             </button>
-            {/* <button className="flex items-center justify-center w-12 h-12 bg-gray-200 rounded-full hover:bg-gray-300 transition">
-              <FaFacebook className="text-xl text-blue-600" />
-            </button>
-            <button className="flex items-center justify-center w-12 h-12 bg-gray-200 rounded-full hover:bg-gray-300 transition">
-              <FaApple className="text-xl text-gray-800" />
-            </button> */}
           </div>
 
-          {/* Signup Link */}
-          <p className="text-center mt-6 text-sm text-gray-600">
+          <p className="text-center mt-6 text-sm">
             Don’t have an account?{" "}
             <Link to="/signup" className="text-primary font-bold" state={from}>
               Sign Up here
@@ -205,11 +182,8 @@ const Login = () => {
         </div>
       </div>
 
-      {/* Right Section - Login Form */}
       <div className="flex-1 flex items-center justify-center">
-        <div className="relative">
-          <Lottie animationData={loginAnimation} loop={true} />
-        </div>
+        <Lottie animationData={loginAnimation} loop={true} />
       </div>
     </div>
   );

@@ -81,12 +81,12 @@ const ManageMyItems = () => {
     );
   }
   return (
-    <div className="bg-gradient-to-b from-primary-light to-background-light">
+    <div className="bg-gradient-to-b from-primary-light to-background-light dark:from-background-dark dark:to-primary-darkest">
       <div className="max-w-5xl mx-auto px-4 py-8">
         <Helmet>
           <title>Manage Post || WhereIsIt</title>
         </Helmet>
-        <h2 className="text-3xl font-bold text-primary-darkest text-center mb-6">
+        <h2 className="text-3xl font-bold text-primary-darkest text-center dark:text-primary-light mb-6">
           Manage My Items
         </h2>
 

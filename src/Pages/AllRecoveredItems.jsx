@@ -37,12 +37,12 @@ const AllRecoveredItems = () => {
   }
 
   return (
-    <section className="bg-gradient-to-b from-primary-light to-background-light">
+    <section className="bg-gradient-to-b from-primary-light to-background-light dark:from-background-dark dark:to-primary-darkest">
       <div className="max-w-5xl mx-auto px-4 py-8">
         <Helmet>
           <title>All Recovered || WhereIsIt</title>
         </Helmet>
-        <h2 className="text-3xl font-bold text-primary-darkest text-center mb-6">
+        <h2 className="text-3xl font-bold text-primary-darkest dark:text-primary-light text-center mb-6">
           All Recovered Items
         </h2>
 
